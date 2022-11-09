@@ -33,6 +33,25 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_read_fn))(void*, uint16_t, uint8_t*);
  */
 typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
 
+/**
+ * \brief Create an emulator instance.
+ *
+ * \param inst              Pointer to the instance pointer to set to the
+ *                          created instance on success.
+ * \param read              The read callback function.
+ * \param write             The write callback function.
+ * \param context           The user context to be passed to the callback
+ *                          functions.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_create)(
+    JEMU_SYM(j65c02)* inst, JEMU_SYM(j65c02_read_fn)* read,
+    JEMU_SYM(j65c02_write_fn)* write, void* context);
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
