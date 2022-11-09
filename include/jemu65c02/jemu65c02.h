@@ -94,6 +94,20 @@ JEMU_SYM(j65c02_interrupt)(JEMU_SYM(j65c02)* inst);
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_nmi)(JEMU_SYM(j65c02)* inst);
 
+/**
+ * \brief Release an emulator instance.
+ *
+ * \note After this call, the instance pointer is no longer valid.
+ *
+ * \param inst              The instance to release..
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_release)(JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -114,6 +128,9 @@ JEMU_SYM(j65c02_nmi)(JEMU_SYM(j65c02)* inst);
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_nmi(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_nmi)(x); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_release(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_release)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
