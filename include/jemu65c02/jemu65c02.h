@@ -95,6 +95,18 @@ JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_nmi)(JEMU_SYM(j65c02)* inst);
 
 /**
+ * \brief Trigger a reset of the processor in the emulator instance.
+ *
+ * \param inst              The instance to reset.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_reset)(JEMU_SYM(j65c02)* inst);
+
+/**
  * \brief Release an emulator instance.
  *
  * \note After this call, the instance pointer is no longer valid.
@@ -130,6 +142,9 @@ JEMU_SYM(j65c02_release)(JEMU_SYM(j65c02)* inst);
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_nmi(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_nmi)(x); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_reset(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_reset)(x); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_release(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_release)(x); } \
