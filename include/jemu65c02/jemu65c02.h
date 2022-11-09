@@ -70,6 +70,18 @@ JEMU_SYM(j65c02_create)(
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_run)(JEMU_SYM(j65c02)* inst, int cycles);
 
+/**
+ * \brief Trigger an interrupt in the given emulator instance.
+ *
+ * \param inst              The instance to interrupt.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_interrupt)(JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -84,6 +96,9 @@ JEMU_SYM(j65c02_run)(JEMU_SYM(j65c02)* inst, int cycles);
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_run(JEMU_SYM(j65c02)* x, int y) { \
             return JEMU_SYM(j65c02_run)(x,y); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_interrupt(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_interrupt)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
