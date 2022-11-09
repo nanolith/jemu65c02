@@ -36,6 +36,9 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
 /**
  * \brief Create an emulator instance.
  *
+ * \note On success, the caller is given ownership of the emulator instance and
+ * must release it by calling \ref j65c02_release when it is no longer needed.
+ *
  * \param inst              Pointer to the instance pointer to set to the
  *                          created instance on success.
  * \param read              The read callback function.
@@ -49,8 +52,23 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
  */
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_create)(
-    JEMU_SYM(j65c02)* inst, JEMU_SYM(j65c02_read_fn)* read,
+    JEMU_SYM(j65c02)** inst, JEMU_SYM(j65c02_read_fn)* read,
     JEMU_SYM(j65c02_write_fn)* write, void* context);
+
+/**
+ * \brief Run the emulator instance for the given number of cycles.
+ *
+ * \note This call may generate calls to the read and write callbacks.
+ *
+ * \param inst              The instance to run.
+ * \param cycles            The number of cycles to run the instance.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_run)(JEMU_SYM(j65c02)* inst, int cycles);
 
 /* C++ compatibility. */
 # ifdef   __cplusplus
