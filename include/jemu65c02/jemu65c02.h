@@ -70,6 +70,27 @@ JEMU_SYM(j65c02_create)(
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_run)(JEMU_SYM(j65c02)* inst, int cycles);
 
+/******************************************************************************/
+/* Start of public exports.                                                   */
+/******************************************************************************/
+#define __INTERNAL_JEMU_IMPORT_jemu65c02_sym(sym) \
+    JEMU_BEGIN_EXPORT \
+    typedef JEMU_SYM(jemu65c02) sym ## jemu65c02; \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_create( \
+        JEMU_SYM(j65c02)** w, JEMU_SYM(j65c02_read_fn)* x, \
+        JEMU_SYM(j65c02_write_fn)* y, void* z) { \
+            return JEMU_SYM(j65c02_create)(w,x,y,z); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_run(JEMU_SYM(j65c02)* x, int y) { \
+            return JEMU_SYM(j65c02_run)(x,y); } \
+    JEMU_END_EXPORT \
+    REQUIRE_SEMICOLON_HERE
+#define JEMU_IMPORT_jemu65c02_as(sym) \
+    __INTERNAL_JEMU_IMPORT_jemu65c02_sym(sym ## _)
+#define JEMU_IMPORT_jemu65c02 \
+    __INTERNAL_JEMU_IMPORT_jemu65c02_sym()
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
