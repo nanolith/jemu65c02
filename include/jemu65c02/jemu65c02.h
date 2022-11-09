@@ -113,7 +113,9 @@ JEMU_SYM(j65c02_release)(JEMU_SYM(j65c02)* inst);
 /******************************************************************************/
 #define __INTERNAL_JEMU_IMPORT_jemu65c02_sym(sym) \
     JEMU_BEGIN_EXPORT \
-    typedef JEMU_SYM(jemu65c02) sym ## jemu65c02; \
+    typedef JEMU_SYM(j65c02) sym ## j65c02; \
+    typedef JEMU_SYM(j65c02_read_fn) j65c02_read_fn; \
+    typedef JEMU_SYM(j65c02_write_fn) j65c02_write_fn; \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_create( \
         JEMU_SYM(j65c02)** w, JEMU_SYM(j65c02_read_fn)* x, \
