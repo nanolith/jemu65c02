@@ -11,6 +11,7 @@
 
 #include <jemu65c02/function_decl.h>
 #include <jemu65c02/status.h>
+#include <stdint.h>
 
 /* C++ compatibility. */
 # ifdef   __cplusplus
@@ -21,6 +22,11 @@ extern "C" {
  * \brief The emulator instance.
  */
 typedef struct JEMU_SYM(j65c02) JEMU_SYM(j65c02);
+
+/**
+ * \brief Read callback function.
+ */
+typedef JEMU_SYM(status) (*j65c02_read_fn)(void*, uint16_t, uint8_t*);
 
 /* C++ compatibility. */
 # ifdef   __cplusplus
