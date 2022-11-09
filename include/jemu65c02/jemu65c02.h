@@ -52,8 +52,8 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
  */
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_create)(
-    JEMU_SYM(j65c02)** inst, JEMU_SYM(j65c02_read_fn)* read,
-    JEMU_SYM(j65c02_write_fn)* write, void* context);
+    JEMU_SYM(j65c02)** inst, JEMU_SYM(j65c02_read_fn) read,
+    JEMU_SYM(j65c02_write_fn) write, void* context);
 
 /**
  * \brief Run the emulator instance for the given number of cycles.
@@ -118,8 +118,8 @@ JEMU_SYM(j65c02_release)(JEMU_SYM(j65c02)* inst);
     typedef JEMU_SYM(j65c02_write_fn) j65c02_write_fn; \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_create( \
-        JEMU_SYM(j65c02)** w, JEMU_SYM(j65c02_read_fn)* x, \
-        JEMU_SYM(j65c02_write_fn)* y, void* z) { \
+        JEMU_SYM(j65c02)** w, JEMU_SYM(j65c02_read_fn) x, \
+        JEMU_SYM(j65c02_write_fn) y, void* z) { \
             return JEMU_SYM(j65c02_create)(w,x,y,z); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_run(JEMU_SYM(j65c02)* x, int y) { \
