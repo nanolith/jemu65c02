@@ -71,6 +71,20 @@ JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_run)(JEMU_SYM(j65c02)* inst, int cycles);
 
 /**
+ * \brief Step through a single instruction.
+ *
+ * \note This call may generate calls to the read and write callbacks.
+ *
+ * \param inst              The instance to run.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_step)(JEMU_SYM(j65c02)* inst);
+
+/**
  * \brief Trigger an interrupt in the given emulator instance.
  *
  * \param inst              The instance to interrupt.
@@ -136,6 +150,9 @@ JEMU_SYM(j65c02_release)(JEMU_SYM(j65c02)* inst);
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_run(JEMU_SYM(j65c02)* x, int y) { \
             return JEMU_SYM(j65c02_run)(x,y); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_step(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_step)(x); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_interrupt(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_interrupt)(x); } \
