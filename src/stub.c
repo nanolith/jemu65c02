@@ -1,2 +1,3 @@
 #include <stdio.h>
-#include <jemu65c02/jemu65c02.h>
+
+#include "jemu65c02_internal.h"
