@@ -136,7 +136,7 @@ JEMU_SYM(j65c02_reset)(JEMU_SYM(j65c02)* inst);
  *
  * \note After this call, the instance pointer is no longer valid.
  *
- * \param inst              The instance to release..
+ * \param inst              The instance to release.
  *
  * \returns a status code indicating success or failure.
  *      - STATUS_SUCCESS on success.
