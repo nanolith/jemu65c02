@@ -161,7 +161,7 @@ uint8_t JEMU_SYM(j65c02_reg_a_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the A register is set.
  */
-void JEMU_SYM(j65c02_reg_a_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
+void JEMU_SYM(j65c02_reg_a_set)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
  * \brief Get the X register value.
@@ -178,7 +178,7 @@ uint8_t JEMU_SYM(j65c02_reg_x_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the X register is set.
  */
-void JEMU_SYM(j65c02_reg_x_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
+void JEMU_SYM(j65c02_reg_x_set)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
  * \brief Get the Y register value.
@@ -195,7 +195,7 @@ uint8_t JEMU_SYM(j65c02_reg_y_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the Y register is set.
  */
-void JEMU_SYM(j65c02_reg_y_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
+void JEMU_SYM(j65c02_reg_y_set)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
  * \brief Get the SP register value.
@@ -212,7 +212,7 @@ uint8_t JEMU_SYM(j65c02_reg_sp_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the SP register is set.
  */
-void JEMU_SYM(j65c02_reg_sp_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
+void JEMU_SYM(j65c02_reg_sp_set)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
  * \brief Get the STATUS register value.
@@ -229,7 +229,7 @@ uint8_t JEMU_SYM(j65c02_reg_status_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the STATUS register is set.
  */
-void JEMU_SYM(j65c02_reg_status_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
+void JEMU_SYM(j65c02_reg_status_set)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
  * \brief Get the PC register value.
@@ -246,7 +246,7 @@ uint16_t JEMU_SYM(j65c02_reg_pc_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the PC register is set.
  */
-void JEMU_SYM(j65c02_reg_pc_set)(const JEMU_SYM(j65c02)* inst, uint16_t val);
+void JEMU_SYM(j65c02_reg_pc_set)(JEMU_SYM(j65c02)* inst, uint16_t val);
 
 /**
  * \brief Get the crash flag.
@@ -272,7 +272,7 @@ int JEMU_SYM(j65c02_cycle_delta_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the cycle delta is set.
  */
-void JEMU_SYM(j65c02_cycle_delta_set)(const JEMU_SYM(j65c02)* inst, int val);
+void JEMU_SYM(j65c02_cycle_delta_set)(JEMU_SYM(j65c02)* inst, int val);
 
 /******************************************************************************/
 /* Start of public exports.                                                   */
@@ -306,46 +306,46 @@ void JEMU_SYM(j65c02_cycle_delta_set)(const JEMU_SYM(j65c02)* inst, int val);
     sym ## j65c02_release(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_release)(x); } \
     static inline uint8_t \
-    sym ## j65c02_reg_a_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_a_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_a_get)(x); } \
     static inline void \
     sym ## j65c02_reg_a_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_a_set)(x,y); } \
     static inline uint8_t \
-    sym ## j65c02_reg_x_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_x_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_x_get)(x); } \
     static inline void \
     sym ## j65c02_reg_x_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_x_set)(x,y); } \
     static inline uint8_t \
-    sym ## j65c02_reg_y_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_y_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_y_get)(x); } \
     static inline void \
     sym ## j65c02_reg_y_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_y_set)(x,y); } \
     static inline uint8_t \
-    sym ## j65c02_reg_sp_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_sp_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_sp_get)(x); } \
     static inline void \
     sym ## j65c02_reg_sp_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_sp_set)(x,y); } \
     static inline uint8_t \
-    sym ## j65c02_reg_status_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_status_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_status_get)(x); } \
     static inline void \
     sym ## j65c02_reg_status_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_status_set)(x,y); } \
     static inline uint16_t \
-    sym ## j65c02_reg_pc_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_reg_pc_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_pc_get)(x); } \
     static inline void \
     sym ## j65c02_reg_pc_set(JEMU_SYM(j65c02)* x, uint16_t y) { \
             JEMU_SYM(j65c02_reg_pc_set)(x,y); } \
     static inline bool \
-    sym ## j65c02_crash_flag_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_crash_flag_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_crash_flag_get)(x); } \
     static inline int \
-    sym ## j65c02_cycle_delta_get(JEMU_SYM(j65c02)* x) { \
+    sym ## j65c02_cycle_delta_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_cycle_delta_get)(x); } \
     static inline void \
     sym ## j65c02_cycle_delta_set(JEMU_SYM(j65c02)* x, int y) { \
