@@ -67,6 +67,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(JEMU_SYM(j65c02)* inst);
 #define __INTERNAL_JEMU_IMPORT_jemu65c02_internal_sym(sym) \
     JEMU_BEGIN_EXPORT \
     typedef JEMU_SYM(j65c02_instruction) sym ## j65c02_instruction; \
+    extern JEMU_SYM(j65c02_instruction) sym ## global_j65c02_instructions; \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_internal_as(sym) \
