@@ -257,6 +257,15 @@ void JEMU_SYM(j65c02_reg_pc_set)(const JEMU_SYM(j65c02)* inst, uint16_t val);
  */
 bool JEMU_SYM(j65c02_crash_flag_get)(const JEMU_SYM(j65c02)* inst);
 
+/**
+ * \brief Get the cycle delta for this emulator instance.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the cycle delta.
+ */
+int JEMU_SYM(j65c02_cycle_delta_get)(const JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -327,6 +336,9 @@ bool JEMU_SYM(j65c02_crash_flag_get)(const JEMU_SYM(j65c02)* inst);
     static inline bool \
     sym ## j65c02_crash_flag_get(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_crash_flag_get)(x); } \
+    static inline int \
+    sym ## j65c02_cycle_delta_get(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_cycle_delta_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
