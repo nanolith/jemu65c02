@@ -22,6 +22,7 @@
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
+    *cycles = 2;
     inst->crash = true;
 
     return JEMU_ERROR_INVALID_OPCODE;
