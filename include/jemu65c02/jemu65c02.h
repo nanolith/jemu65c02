@@ -213,6 +213,15 @@ uint8_t JEMU_SYM(j65c02_reg_sp_get)(const JEMU_SYM(j65c02)* inst);
  */
 void JEMU_SYM(j65c02_reg_sp_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
 
+/**
+ * \brief Get the STATUS register value.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the STATUS register value.
+ */
+uint8_t JEMU_SYM(j65c02_reg_status_get)(const JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -268,6 +277,9 @@ void JEMU_SYM(j65c02_reg_sp_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
     static inline void \
     sym ## j65c02_reg_sp_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_sp_set)(x,y); } \
+    static inline uint8_t \
+    sym ## j65c02_reg_status_get(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_reg_status_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
