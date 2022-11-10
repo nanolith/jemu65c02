@@ -18,6 +18,10 @@
 extern "C" {
 # endif /*__cplusplus*/
 
+#define JEMU_65c02_PERSONALITY_MOS                  1
+#define JEMU_65c02_PERSONALITY_ROCKWELL             2
+#define JEMU_65c02_PERSONALITY_WDC                  3
+
 /**
  * \brief The emulator instance.
  */
@@ -45,6 +49,7 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
  * \param write             The write callback function.
  * \param context           The user context to be passed to the callback
  *                          functions.
+ * \param personality       The processor personality (MOS, ROCKWELL, or WDC).
  *
  * \returns a status code indicating success or failure.
  *      - STATUS_SUCCESS on success.
@@ -53,7 +58,7 @@ typedef JEMU_SYM(status) (*JEMU_SYM(j65c02_write_fn))(void*, uint16_t, uint8_t);
 JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_create)(
     JEMU_SYM(j65c02)** inst, JEMU_SYM(j65c02_read_fn) read,
-    JEMU_SYM(j65c02_write_fn) write, void* context);
+    JEMU_SYM(j65c02_write_fn) write, void* context, int personality);
 
 /**
  * \brief Run the emulator instance for the given number of cycles.
