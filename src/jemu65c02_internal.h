@@ -38,6 +38,7 @@ extern JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256];
  */
 struct JEMU_SYM(j65c02)
 {
+    int personality;
     uint8_t reg_a;
     uint8_t reg_x;
     uint8_t reg_y;
