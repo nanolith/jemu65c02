@@ -29,6 +29,11 @@ struct JEMU_SYM(j65c02_instruction)
 };
 
 /**
+ * The external instruction array global.
+ */
+extern JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256];
+
+/**
  * \brief The emulator instance.
  */
 struct JEMU_SYM(j65c02)
