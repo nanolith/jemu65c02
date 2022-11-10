@@ -162,6 +162,15 @@ uint8_t JEMU_SYM(j65c02_reg_a_get)(const JEMU_SYM(j65c02)* inst);
  */
 void JEMU_SYM(j65c02_reg_a_set)(const JEMU_SYM(j65c02)* inst);
 
+/**
+ * \brief Get the X register value.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the X register value.
+ */
+uint8_t JEMU_SYM(j65c02_reg_x_get)(const JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
