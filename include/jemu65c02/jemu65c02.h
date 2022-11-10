@@ -239,6 +239,14 @@ void JEMU_SYM(j65c02_reg_status_set)(const JEMU_SYM(j65c02)* inst, uint8_t val);
  */
 uint16_t JEMU_SYM(j65c02_reg_pc_get)(const JEMU_SYM(j65c02)* inst);
 
+/**
+ * \brief Set the PC register value.
+ *
+ * \param inst              The instance for this operation.
+ * \param val               The value to which the PC register is set.
+ */
+void JEMU_SYM(j65c02_reg_pc_set)(const JEMU_SYM(j65c02)* inst, uint16_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -303,6 +311,9 @@ uint16_t JEMU_SYM(j65c02_reg_pc_get)(const JEMU_SYM(j65c02)* inst);
     static inline uint16_t \
     sym ## j65c02_reg_pc_get(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_reg_pc_get)(x); } \
+    static inline void \
+    sym ## j65c02_reg_pc_set(JEMU_SYM(j65c02)* x, uint16_t y) { \
+            JEMU_SYM(j65c02_reg_pc_set)(x,y); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
