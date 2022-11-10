@@ -11,6 +11,7 @@
 
 #include <jemu65c02/function_decl.h>
 #include <jemu65c02/status.h>
+#include <stdbool.h>
 #include <stdint.h>
 
 /* C++ compatibility. */
@@ -247,6 +248,15 @@ uint16_t JEMU_SYM(j65c02_reg_pc_get)(const JEMU_SYM(j65c02)* inst);
  */
 void JEMU_SYM(j65c02_reg_pc_set)(const JEMU_SYM(j65c02)* inst, uint16_t val);
 
+/**
+ * \brief Get the crash flag.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the crash flag.
+ */
+bool JEMU_SYM(j65c02_crash_flag_get)(const JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -314,6 +324,9 @@ void JEMU_SYM(j65c02_reg_pc_set)(const JEMU_SYM(j65c02)* inst, uint16_t val);
     static inline void \
     sym ## j65c02_reg_pc_set(JEMU_SYM(j65c02)* x, uint16_t y) { \
             JEMU_SYM(j65c02_reg_pc_set)(x,y); } \
+    static inline bool \
+    sym ## j65c02_crash_flag_get(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_crash_flag_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
