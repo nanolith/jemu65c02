@@ -27,6 +27,11 @@ typedef int32_t JEMU_SYM(status);
  */
 #define STATUS_SUCCESS                                              0x00000000
 
+/**
+ * \brief An invalid opcode was encountered.
+ */
+#define JEMU_ERROR_INVALID_OPCODE                                   0x80000000
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
