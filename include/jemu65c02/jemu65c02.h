@@ -216,6 +216,9 @@ void JEMU_SYM(j65c02_reg_x_set)(const JEMU_SYM(j65c02)* inst);
     static inline void \
     sym ## j65c02_reg_a_set(JEMU_SYM(j65c02)* x, uint8_t y) { \
             JEMU_SYM(j65c02_reg_a_set)(x,y); } \
+    static inline uint8_t \
+    sym ## j65c02_reg_x_get(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_reg_x_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
