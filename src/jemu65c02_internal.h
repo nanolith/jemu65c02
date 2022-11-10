@@ -24,8 +24,8 @@ typedef struct JEMU_SYM(j65c02_instruction) JEMU_SYM(j65c02_instruction);
 
 struct JEMU_SYM(j65c02_instruction)
 {
-    JEMU_SYM(status) (*exec)(JEMU_SYM(j65c02)* inst);
-    int cycles;
+    JEMU_SYM(status) (*exec)(JEMU_SYM(j65c02)* inst, int* cycles);
+    int max_cycles;
 };
 
 /**
@@ -56,10 +56,13 @@ struct JEMU_SYM(j65c02)
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
  *
  * \returns JEMU_ERROR_INVALID_OPCODE.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(JEMU_SYM(j65c02)* inst);
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
 
 /******************************************************************************/
 /* Start of public exports.                                                   */

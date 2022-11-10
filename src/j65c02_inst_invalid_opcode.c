@@ -14,10 +14,13 @@
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
  *
  * \returns JEMU_ERROR_INVALID_OPCODE.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(JEMU_SYM(j65c02)* inst)
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(
+    JEMU_SYM(j65c02)* inst, int* cycles)
 {
     inst->crash = true;
 
