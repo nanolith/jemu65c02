@@ -210,6 +210,9 @@ void JEMU_SYM(j65c02_reg_x_set)(const JEMU_SYM(j65c02)* inst);
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_release(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_release)(x); } \
+    static inline uint8_t \
+    sym ## j65c02_reg_a_get(JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_reg_a_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
