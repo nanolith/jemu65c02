@@ -160,7 +160,7 @@ uint8_t JEMU_SYM(j65c02_reg_a_get)(const JEMU_SYM(j65c02)* inst);
  * \param inst              The instance for this operation.
  * \param val               The value to which the A register is set.
  */
-void JEMU_SYM(j65c02_reg_a_set)(const JEMU_SYM(j65c02)* inst);
+void JEMU_SYM(j65c02_reg_a_set)(const JEMU_SYM(j65c02)* inst, uint32_t val);
 
 /**
  * \brief Get the X register value.
