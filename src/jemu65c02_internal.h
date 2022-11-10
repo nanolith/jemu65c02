@@ -20,6 +20,8 @@ extern "C" {
 /**
  * \brief An instruction.
  */
+typedef struct JEMU_SYM(j65c02_instruction) JEMU_SYM(j65c02_instruction);
+
 struct JEMU_SYM(j65c02_instruction)
 {
     JEMU_SYM(status) (*exec)(JEMU_SYM(j65c02)* inst);
@@ -43,6 +45,19 @@ struct JEMU_SYM(j65c02)
     void* user_context;
     bool crash;
 };
+
+/******************************************************************************/
+/* Start of public exports.                                                   */
+/******************************************************************************/
+#define __INTERNAL_JEMU_IMPORT_jemu65c02_internal_sym(sym) \
+    JEMU_BEGIN_EXPORT \
+    typedef JEMU_SYM(j65c02_instruction) sym ## j65c02_instruction; \
+    JEMU_END_EXPORT \
+    REQUIRE_SEMICOLON_HERE
+#define JEMU_IMPORT_jemu65c02_internal_as(sym) \
+    __INTERNAL_JEMU_IMPORT_jemu65c02_internal_sym(sym ## _)
+#define JEMU_IMPORT_jemu65c02_internal \
+    __INTERNAL_JEMU_IMPORT_jemu65c02_internal_sym()
 
 /* C++ compatibility. */
 # ifdef   __cplusplus
