@@ -46,6 +46,16 @@ struct JEMU_SYM(j65c02)
     bool crash;
 };
 
+/**
+ * \brief Handle an invalid opcode instruction by setting the crash flag.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ *
+ * \returns JEMU_ERROR_INVALID_OPCODE.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
