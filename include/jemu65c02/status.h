@@ -32,6 +32,11 @@ typedef int32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_INVALID_OPCODE                                   0x80000000
 
+/**
+ * \brief An invalid processor personality was selected.
+ */
+#define JEMU_ERROR_INVALID_PERSONALITY                              0x80000001
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
