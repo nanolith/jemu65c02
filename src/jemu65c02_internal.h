@@ -18,6 +18,15 @@ extern "C" {
 # endif /*__cplusplus*/
 
 /**
+ * \brief An instruction.
+ */
+struct JEMU_SYM(j65c02_instruction)
+{
+    JEMU_SYM(status) (*exec)(JEMU_SYM(j65c02)* inst);
+    int cycles;
+};
+
+/**
  * \brief The emulator instance.
  */
 struct JEMU_SYM(j65c02)
@@ -28,6 +37,7 @@ struct JEMU_SYM(j65c02)
     uint8_t reg_sp;
     uint8_t reg_status;
     uint16_t reg_pc;
+    int cycle_delta;
     JEMU_SYM(j65c02_read_fn) read;
     JEMU_SYM(j65c02_write_fn) write;
     void* user_context;
