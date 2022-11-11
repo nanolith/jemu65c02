@@ -283,6 +283,15 @@ void JEMU_SYM(j65c02_cycle_delta_set)(JEMU_SYM(j65c02)* inst, int val);
  */
 int JEMU_SYM(j65c02_personality_get)(const JEMU_SYM(j65c02)* inst);
 
+/**
+ * \brief Get the emulation mode for this emulator instance.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the processor emulation mode.
+ */
+int JEMU_SYM(j65c02_emulation_mode_get)(const JEMU_SYM(j65c02)* inst);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -362,6 +371,9 @@ int JEMU_SYM(j65c02_personality_get)(const JEMU_SYM(j65c02)* inst);
     static inline int \
     sym ## j65c02_personality_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_personality_get)(x); } \
+    static inline int \
+    sym ## j65c02_emulation_mode_get(const JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_emulation_mode_get)(x); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_as(sym) \
