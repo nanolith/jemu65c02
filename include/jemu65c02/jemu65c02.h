@@ -97,16 +97,17 @@ JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_step)(JEMU_SYM(j65c02)* inst);
 
 /**
- * \brief Trigger an interrupt in the given emulator instance.
+ * \brief Set the IRQ flag to active (true) or inactive (false).
  *
  * \param inst              The instance to interrupt.
+ * \param irq               The flag value to set.
  *
  * \returns a status code indicating success or failure.
  *      - STATUS_SUCCESS on success.
  *      - a non-zero error code on failure.
  */
 JEMU_SYM(status) FN_DECL_MUST_CHECK
-JEMU_SYM(j65c02_interrupt)(JEMU_SYM(j65c02)* inst);
+JEMU_SYM(j65c02_interrupt)(JEMU_SYM(j65c02)* inst, bool irq);
 
 /**
  * \brief Trigger a non-maskable interrupt in the given emulator instance.
@@ -313,8 +314,8 @@ int JEMU_SYM(j65c02_emulation_mode_get)(const JEMU_SYM(j65c02)* inst);
     sym ## j65c02_step(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_step)(x); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
-    sym ## j65c02_interrupt(JEMU_SYM(j65c02)* x) { \
-            return JEMU_SYM(j65c02_interrupt)(x); } \
+    sym ## j65c02_interrupt(JEMU_SYM(j65c02)* x, bool y) { \
+            return JEMU_SYM(j65c02_interrupt)(x,y); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_nmi(JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_nmi)(x); } \
