@@ -26,6 +26,15 @@ extern "C" {
 #define JEMU_65c02_EMULATION_MODE_STRICT            1
 #define JEMU_65c02_EMULATION_MODE_NOP               2
 
+#define JEMU_65c02_STATUS_NEGATIVE               0x80
+#define JEMU_65c02_STATUS_OVERFLOW               0x40
+#define JEMU_65c02_STATUS_NC                     0x20
+#define JEMU_65c02_STATUS_BREAK                  0x10
+#define JEMU_65c02_STATUS_DECIMAL                0x08
+#define JEMU_65c02_STATUS_INTERRUPT              0x04
+#define JEMU_65c02_STATUS_ZERO                   0x02
+#define JEMU_65c02_STATUS_CARRY                  0x01
+
 /**
  * \brief The emulator instance.
  */
