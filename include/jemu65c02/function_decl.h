@@ -42,7 +42,7 @@
 /*
  * Symbol expansion and combination macro.
  */
-#define JEMU_SYM_COMBINE(x, y, z) rcpr ## _ ## x ## _ ## y ## _ ## z
+#define JEMU_SYM_COMBINE(x, y, z) jemu ## _ ## x ## _ ## y ## _ ## z
 #define JEMU_SYM_COMBINE1(x, y, z) JEMU_SYM_COMBINE(x, y, z)
 
 /*
