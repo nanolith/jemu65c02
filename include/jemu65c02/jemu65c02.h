@@ -297,14 +297,15 @@ int JEMU_SYM(j65c02_emulation_mode_get)(const JEMU_SYM(j65c02)* inst);
 /******************************************************************************/
 #define __INTERNAL_JEMU_IMPORT_jemu65c02_sym(sym) \
     JEMU_BEGIN_EXPORT \
+    typedef JEMU_SYM(status) sym ## status; \
     typedef JEMU_SYM(j65c02) sym ## j65c02; \
     typedef JEMU_SYM(j65c02_read_fn) j65c02_read_fn; \
     typedef JEMU_SYM(j65c02_write_fn) j65c02_write_fn; \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_create( \
-        JEMU_SYM(j65c02)** w, JEMU_SYM(j65c02_read_fn) x, \
-        JEMU_SYM(j65c02_write_fn) y, void* z) { \
-            return JEMU_SYM(j65c02_create)(w,x,y,z); } \
+        JEMU_SYM(j65c02)** u, JEMU_SYM(j65c02_read_fn) v, \
+        JEMU_SYM(j65c02_write_fn) w, void* x, int y, int z) { \
+            return JEMU_SYM(j65c02_create)(u,v,w,x,y,z); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_run(JEMU_SYM(j65c02)* x, int y) { \
             return JEMU_SYM(j65c02_run)(x,y); } \
