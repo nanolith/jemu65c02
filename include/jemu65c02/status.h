@@ -37,6 +37,11 @@ typedef int32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_INVALID_PERSONALITY                              0x80000001
 
+/**
+ * \brief An invalid emulation mode was selected.
+ */
+#define JEMU_ERROR_INVALID_EMULATION_MODE                           0x80000002
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
