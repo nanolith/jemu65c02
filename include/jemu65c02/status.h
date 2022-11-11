@@ -42,6 +42,11 @@ typedef int32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_INVALID_EMULATION_MODE                           0x80000002
 
+/**
+ * \brief An out-of-memory condition was encountered.
+ */
+#define JEMU_ERROR_OUT_OF_MEMORY                                    0x80000003
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
