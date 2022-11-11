@@ -20,7 +20,7 @@ extern "C" {
 /**
  * \brief Status is a 32-bit integer.
 */
-typedef int32_t JEMU_SYM(status);
+typedef uint32_t JEMU_SYM(status);
 
 /**
  * \brief The operation completed successfully.
