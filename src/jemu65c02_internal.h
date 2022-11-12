@@ -55,6 +55,23 @@ struct JEMU_SYM(j65c02)
 };
 
 /**
+ * \brief Fetch a byte from the program counter, then increment the program
+ * counter.
+ *
+ * \param val               Pointer to hold the value fetched from the program
+ *                          counter.
+ * \param inst              The emulator instance on which this operation is
+ *                          performed.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_fetch)(
+    uint8_t* val, JEMU_SYM(j65c02)* inst);
+
+/**
  * \brief Handle an invalid opcode instruction by setting the crash flag.
  *
  * \param inst              The emulator instance on which this instruction
@@ -73,6 +90,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(
 #define __INTERNAL_JEMU_IMPORT_jemu65c02_internal_sym(sym) \
     JEMU_BEGIN_EXPORT \
     typedef JEMU_SYM(j65c02_instruction) sym ## j65c02_instruction; \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_fetch(uint8_t* x, JEMU_SYM(j65c02)* y) { \
+        return JEMU_SYM(j65c02_fetch)(x,y); } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_internal_as(sym) \
