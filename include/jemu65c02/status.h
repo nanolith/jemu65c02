@@ -47,6 +47,11 @@ typedef uint32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_OUT_OF_MEMORY                                    0x80000003
 
+/**
+ * \brief The processor is in a bad state.
+ */
+#define JEMU_ERROR_INVALID_PROCESSOR_STATE                          0x80000004
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
