@@ -21,7 +21,6 @@ JEMU_IMPORT_jemu65c02;
 void JEMU_SYM(j65c02_op_ADC)(
     JEMU_SYM(j65c02)* inst, uint8_t val)
 {
-    status retval;
     uint8_t rhs = val;
     uint8_t carry = 0;
 
@@ -112,7 +111,4 @@ void JEMU_SYM(j65c02_op_ADC)(
 
     /* store A. */
     inst->reg_a = (uint8_t)(result & 0xFF);
-    *cycles = 2;
-
-    return STATUS_SUCCESS;
 }

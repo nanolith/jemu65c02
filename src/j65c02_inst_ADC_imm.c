@@ -28,7 +28,6 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_imm)(
 {
     status retval;
     uint8_t rhs = 0;
-    uint8_t carry = 0;
 
     /* fetch the immediate value. */
     retval = inst->read(inst->user_context, inst->reg_pc++, &rhs);
@@ -37,94 +36,22 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_imm)(
         return retval;
     }
 
-    /* set a carry if the carry flag is set. */
-    if (inst->reg_status & JEMU_65c02_STATUS_CARRY)
-    {
-        carry = 1;
-    }
+    /* perform the ADC operation. */
+    JEMU_SYM(j65c02_op_ADC)(inst, rhs);
 
-    /* compute the result. */
-    unsigned int lhs = inst->reg_a;
-    unsigned int result = lhs;
-    result += rhs;
-    result += carry;
-
-    /* handle the non-BCD case. */
-    if (! (inst->reg_status & JEMU_65c02_STATUS_DECIMAL))
-    {
-        /* if the result is greater than 255, set the carry flag. */
-        if (result > 0xFF)
-        {
-            inst->reg_status |= JEMU_65c02_STATUS_CARRY;
-        }
-        /* otherwise, clear it. */
-        else
-        {
-            inst->reg_status &= ~JEMU_65c02_STATUS_CARRY;
-        }
-    }
-    /* BCD case. */
-    else
-    {
-        /* TODO - add one to the cycle if this is WDC / Rockwell personality. */
-
-        /* ripple add the lower BCD digit. */
-        if ((lhs & 0x0F) + (rhs & 0x0F) + carry > 9)
-        {
-            result += 6;
-        }
-
-        /* ripple the upper BCD digit. */
-        if (result > 0x99)
-        {
-            result += 0x60;
-        }
-
-        /* if the result is greater than 0x99, set the carry flag. */
-        if (result > 0x99)
-        {
-            inst->reg_status |= JEMU_65c02_STATUS_CARRY;
-        }
-        /* otherwise, clear it. */
-        else
-        {
-            inst->reg_status &= ~JEMU_65c02_STATUS_CARRY;
-        }
-    }
-
-    /* handle the negative flag. */
-    if (result & 0x80)
-    {
-        inst->reg_status |= JEMU_65c02_STATUS_NEGATIVE;
-    }
-    else
-    {
-        inst->reg_status &= ~JEMU_65c02_STATUS_NEGATIVE;
-    }
-
-    /* handle the zero flag. */
-    if (0 == (result & 0xFF))
-    {
-        inst->reg_status |= JEMU_65c02_STATUS_ZERO;
-    }
-    else
-    {
-        inst->reg_status &= ~JEMU_65c02_STATUS_ZERO;
-    }
-
-    /* handle the overflow flag. */
-    if ((lhs ^ result) & (rhs ^ result) & 0x80)
-    {
-        inst->reg_status |= JEMU_65c02_STATUS_OVERFLOW;
-    }
-    else
-    {
-        inst->reg_status &= ~JEMU_65c02_STATUS_OVERFLOW;
-    }
-
-    /* store A. */
-    inst->reg_a = (uint8_t)(result & 0xFF);
+    /* this mode normally takes 2 cycles. */
     *cycles = 2;
+
+    /* add a cycle if we are in BCD mode. */
+    if ((inst->reg_status & JEMU_65c02_STATUS_DECIMAL))
+    {
+        if (
+            inst->personality == JEMU_65c02_PERSONALITY_ROCKWELL
+         || inst->personality == JEMU_65c02_PERSONALITY_WDC)
+        {
+            *cycles += 1;
+        }
+    }
 
     return STATUS_SUCCESS;
 }
