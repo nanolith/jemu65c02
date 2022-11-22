@@ -32,6 +32,13 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_idr)(
     uint8_t addr_high = 0;
     uint8_t rhs = 0;
 
+    /* this instruction is invalid on MOS silicon. */
+    if (JEMU_65c02_PERSONALITY_MOS == inst->personality)
+    {
+        inst->crash = true;
+        return JEMU_ERROR_INVALID_OPCODE;
+    }
+
     /* fetch the zero-page index. */
     retval = inst->read(inst->user_context, inst->reg_pc++, &idx);
     if (STATUS_SUCCESS != retval)
