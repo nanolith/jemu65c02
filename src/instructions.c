@@ -231,7 +231,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     /* Opcode 0x64 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x65 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    { .exec = &JEMU_SYM(j65c02_inst_ADC_zer), .max_cycles = 4 },
     /* Opcode 0x66 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x67 - TODO implement. */
@@ -239,7 +239,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     /* Opcode 0x68 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x69 - ADC IMM instruction. */
-    { .exec = &JEMU_SYM(j65c02_inst_ADC_imm), .max_cycles = 2 },
+    { .exec = &JEMU_SYM(j65c02_inst_ADC_imm), .max_cycles = 3 },
     /* Opcode 0x6A - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x6B - TODO implement. */
