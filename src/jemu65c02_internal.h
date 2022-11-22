@@ -85,6 +85,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_invalid_opcode)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
 /**
+ * \brief Perform the ADC operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to add to the accumulator.
+ */
+void JEMU_SYM(j65c02_op_ADC)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
+/**
  * \brief Handle an ADC IMM instruction.
  *
  * \param inst              The emulator instance on which this instruction

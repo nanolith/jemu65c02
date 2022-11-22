@@ -1,7 +1,7 @@
 /**
- * \file j65c02_inst_ADC_imm.c
+ * \file j65c02_op_ADC.c
  *
- * \brief Handle an ADC imm instruction.
+ * \brief Perform the ADC operation.
  *
  * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
@@ -12,30 +12,18 @@
 JEMU_IMPORT_jemu65c02;
 
 /**
- * \brief Handle an ADC IMM instruction.
+ * \brief Perform the ADC operation.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
- * \param cycles            The number of cycles taken to execute this
- *                          instruction.
- *
- * \returns a status code indicating success or failure.
- *      - STATUS_SUCCESS on success.
- *      - a non-zero error code on failure.
+ * \param val               The value to add to the accumulator.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_imm)(
-    JEMU_SYM(j65c02)* inst, int* cycles)
+void JEMU_SYM(j65c02_op_ADC)(
+    JEMU_SYM(j65c02)* inst, uint8_t val)
 {
     status retval;
-    uint8_t rhs = 0;
+    uint8_t rhs = val;
     uint8_t carry = 0;
-
-    /* fetch the immediate value. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &rhs);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
 
     /* set a carry if the carry flag is set. */
     if (inst->reg_status & JEMU_65c02_STATUS_CARRY)
