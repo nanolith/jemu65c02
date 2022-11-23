@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_step);
+TEST_SUITE(j65c02_ADC_abs_y);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,9 +25,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x7D ADC ABS X (test without carry).
+ * 0x79 ADC ABS Y (test without carry).
  */
-TEST(step_ADC_abs_x_without_carry)
+TEST(step_ADC_abs_y_without_carry)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -43,7 +43,7 @@ TEST(step_ADC_abs_x_without_carry)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an ADC instruction. */
-    mem[0x1000] = 0x7D;
+    mem[0x1000] = 0x79;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x05;
 
@@ -67,8 +67,8 @@ TEST(step_ADC_abs_x_without_carry)
     /* PRECONDITION: A is set to EXPECTED_A_VALUE. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: the carry flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
@@ -119,9 +119,9 @@ TEST(step_ADC_abs_x_without_carry)
 }
 
 /**
- * 0x7D ADC ABS X (test with carry).
+ * 0x79 ADC ABS Y (test with carry).
  */
-TEST(step_ADC_abs_x_with_carry)
+TEST(step_ADC_abs_y_with_carry)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -137,7 +137,7 @@ TEST(step_ADC_abs_x_with_carry)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an ADC instruction. */
-    mem[0x1000] = 0x7D;
+    mem[0x1000] = 0x79;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x05;
 
@@ -161,8 +161,8 @@ TEST(step_ADC_abs_x_with_carry)
     /* PRECONDITION: A is set to EXPECTED_A_VALUE. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: the carry flag is set. */
     j65c02_reg_status_set(
@@ -191,9 +191,9 @@ TEST(step_ADC_abs_x_with_carry)
 }
 
 /**
- * 0x7D ADC ABS X (test set carry).
+ * 0x79 ADC ABS Y (test set carry).
  */
-TEST(step_ADC_abs_x_set_carry)
+TEST(step_ADC_abs_y_set_carry)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -209,7 +209,7 @@ TEST(step_ADC_abs_x_set_carry)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an ADC instruction. */
-    mem[0x1000] = 0x7D;
+    mem[0x1000] = 0x79;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x05;
 
@@ -233,8 +233,8 @@ TEST(step_ADC_abs_x_set_carry)
     /* PRECONDITION: A is set to EXPECTED_A_VALUE. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: the carry flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
@@ -276,9 +276,9 @@ TEST(step_ADC_abs_x_set_carry)
 }
 
 /**
- * 0x7D ADC ABS X (overflow 1)
+ * 0x79 ADC ABS Y (overflow 1)
  */
-TEST(step_ADC_abs_x_overflow1)
+TEST(step_ADC_abs_y_overflow1)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -294,7 +294,7 @@ TEST(step_ADC_abs_x_overflow1)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an ADC instruction. */
-    mem[0x1000] = 0x7D;
+    mem[0x1000] = 0x79;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x05;
 
@@ -318,8 +318,8 @@ TEST(step_ADC_abs_x_overflow1)
     /* PRECONDITION: A is set to EXPECTED_A_VALUE. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: the carry flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
@@ -361,9 +361,9 @@ TEST(step_ADC_abs_x_overflow1)
 }
 
 /**
- * 0x7D ADC ABS X (overflow 2)
+ * 0x79 ADC ABS Y (overflow 2)
  */
-TEST(step_ADC_abs_x_overflow2)
+TEST(step_ADC_abs_y_overflow2)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -379,7 +379,7 @@ TEST(step_ADC_abs_x_overflow2)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an ADC instruction. */
-    mem[0x1000] = 0x7D;
+    mem[0x1000] = 0x79;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x05;
 
@@ -403,8 +403,8 @@ TEST(step_ADC_abs_x_overflow2)
     /* PRECONDITION: A is set to EXPECTED_A_VALUE. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: the carry flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
@@ -446,9 +446,9 @@ TEST(step_ADC_abs_x_overflow2)
 }
 
 /**
- * 0x7D ADC ABS X (BCD no carry).
+ * 0x79 ADC ABS Y (BCD no carry).
  */
-TEST(step_ADC_abs_x_BCD)
+TEST(step_ADC_abs_y_BCD)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -483,7 +483,7 @@ TEST(step_ADC_abs_x_BCD)
         mem[0xFFFD] = 0x10;
 
         /* at 0x1000, add an ADC instruction. */
-        mem[0x1000] = 0x7D;
+        mem[0x1000] = 0x79;
         mem[0x1001] = 0x00;
         mem[0x1002] = 0x05;
 
@@ -496,8 +496,8 @@ TEST(step_ADC_abs_x_BCD)
         /* PRECONDITION: A is set to the add input. */
         j65c02_reg_a_set(inst, EXPECTED_ADD_INPUT[i]);
 
-        /* PRECONDITION: X is set to 0x05. */
-        j65c02_reg_x_set(inst, 0x05);
+        /* PRECONDITION: Y is set to 0x05. */
+        j65c02_reg_y_set(inst, 0x05);
 
         /* PRECONDITION: the carry flag is not set. */
         TEST_EXPECT(
@@ -534,54 +534,6 @@ TEST(step_ADC_abs_x_BCD)
                 !(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
         }
     }
-
-    /* clean up. */
-    TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
-}
-
-/**
- * 0xEA NOP instruction.
- */
-TEST(step_NOP)
-{
-    j65c02* inst = nullptr;
-    uint8_t mem[65536];
-
-    /* clear memory. */
-    memset(mem, 0, sizeof(mem));
-
-    /* set the reset vector. */
-    mem[0xFFFC] = 0x00;
-    mem[0xFFFD] = 0x10;
-
-    /* at 0x1000, add a NOP instruction. */
-    mem[0x1000] = 0xEA;
-
-    /* create an instance. */
-    TEST_ASSERT(
-        STATUS_SUCCESS
-            == j65c02_create(
-                    &inst, &mem_read, &mem_write, mem,
-                    JEMU_65c02_PERSONALITY_WDC,
-                    JEMU_65c02_EMULATION_MODE_STRICT));
-
-    /* PRECONDITION: crash flag is set. */
-    TEST_EXPECT(j65c02_crash_flag_get(inst));
-
-    /* reset the processor. */
-    TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
-
-    /* PRECONDITION: PC is 0x1000. */
-    TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
-
-    /* single step. */
-    TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
-
-    /* POSTCONDITION: PC is 0x1001. */
-    TEST_EXPECT(0x1001 == j65c02_reg_pc_get(inst));
-
-    /* POSTCONDITION: crash flag is not set. */
-    TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
     /* clean up. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
