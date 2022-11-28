@@ -307,11 +307,28 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
     sym ## j65c02_addr_zer(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
         JEMU_SYM(status) retval; \
         uint8_t offset; \
-        /* fetch the zero-page-offset. */ \
+        /* fetch the zero-page index. */ \
         retval = inst->read(inst->user_context, inst->reg_pc++, &offset); \
         if (STATUS_SUCCESS != retval) return retval; \
         /* fetch the zero-page value. */ \
         return inst->read(inst->user_context, offset, val); \
+    } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_zer_idr(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+        JEMU_SYM(status) retval; \
+        uint8_t offset, addr_low, addr_high; \
+        /* fetch the zero-page index. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &offset); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the low address from the zero-page. */ \
+        retval = inst->read(inst->user_context, offset++, &addr_low); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the high address from the zero-page. */ \
+        retval = inst->read(inst->user_context, offset++, &addr_high); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the value. */ \
+        return \
+            inst->read(inst->user_context, (addr_high << 8) | addr_low, val); \
     } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
