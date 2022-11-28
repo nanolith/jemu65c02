@@ -268,6 +268,24 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
             inst->read(inst->user_context, addr_high << 8 | addr_low, val); \
         return STATUS_SUCCESS; \
     } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_abs_x(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+        JEMU_SYM(status) retval; \
+        uint8_t addr_low, addr_high; \
+        uint16_t addr; \
+        /* fetch the low part of the address. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &addr_low); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the high part of the address. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* add X to this address. */ \
+        addr = ((addr_high << 8) | addr_low) + inst->reg_x; \
+        /* fetch the value from the address. */ \
+        retval = \
+            inst->read(inst->user_context, addr, val); \
+        return STATUS_SUCCESS; \
+    } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_internal_as(sym) \
