@@ -10,6 +10,7 @@
 #include "jemu65c02_internal.h"
 
 JEMU_IMPORT_jemu65c02;
+JEMU_IMPORT_jemu65c02_internal;
 
 /**
  * \brief Handle an ADC IMM instruction.
@@ -29,8 +30,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_imm)(
     status retval;
     uint8_t rhs = 0;
 
-    /* fetch the immediate value. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &rhs);
+    /* fetch the value. */
+    retval = j65c02_addr_imm(inst, &rhs);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
