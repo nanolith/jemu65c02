@@ -244,6 +244,31 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_y_idr)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the AND operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value for this operation.
+ */
+void JEMU_SYM(j65c02_op_AND)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
+/**
+ * \brief Handle an AND IMM instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_imm)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
