@@ -330,6 +330,18 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
         return \
             inst->read(inst->user_context, (addr_high << 8) | addr_low, val); \
     } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_zer_x(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+        JEMU_SYM(status) retval; \
+        uint8_t offset; \
+        /* fetch the zero-page index. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &offset); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* increment the offset by X. */ \
+        offset += inst->reg_x; \
+        /* fetch the value. */ \
+        return inst->read(inst->user_context, offset, val); \
+    } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_internal_as(sym) \

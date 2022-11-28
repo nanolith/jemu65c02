@@ -10,6 +10,7 @@
 #include "jemu65c02_internal.h"
 
 JEMU_IMPORT_jemu65c02;
+JEMU_IMPORT_jemu65c02_internal;
 
 /**
  * \brief Handle an ADC ZER X instruction.
@@ -27,21 +28,10 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_x)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
-    uint8_t off = 0;
     uint8_t rhs = 0;
 
-    /* fetch the zero-page offset. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &off);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
-    /* increment the offset by X. */
-    off += inst->reg_x;
-
-    /* fetch the zero-page value. */
-    retval = inst->read(inst->user_context, off, &rhs);
+    /* fetch the value. */
+    retval = j65c02_addr_zer_x(inst, &rhs);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
