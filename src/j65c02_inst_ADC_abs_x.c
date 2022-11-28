@@ -10,6 +10,7 @@
 #include "jemu65c02_internal.h"
 
 JEMU_IMPORT_jemu65c02;
+JEMU_IMPORT_jemu65c02_internal;
 
 /**
  * \brief Handle an ADC ABS X instruction.
@@ -27,30 +28,10 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_abs_x)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
-    uint8_t addr_low = 0;
-    uint8_t addr_high = 0;
-    uint16_t addr = 0;
     uint8_t rhs = 0;
 
-    /* fetch the low part of the address. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &addr_low);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
-    /* fetch the high part of the address. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
-    /* add X to this address. */
-    addr = ((addr_high << 8) | addr_low) + inst->reg_x;
-
-    /* fetch the absolute value. */
-    retval = inst->read(inst->user_context, addr, &rhs);
+    /* fetch the value. */
+    retval = j65c02_addr_abs_x(inst, &rhs);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
