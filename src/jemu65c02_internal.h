@@ -264,9 +264,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
         retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high); \
         if (STATUS_SUCCESS != retval) return retval; \
         /* fetch the value from the address. */ \
-        retval = \
+        return \
             inst->read(inst->user_context, addr_high << 8 | addr_low, val); \
-        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_abs_x(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
@@ -282,9 +281,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
         /* add X to this address. */ \
         addr = ((addr_high << 8) | addr_low) + inst->reg_x; \
         /* fetch the value from the address. */ \
-        retval = \
+        return \
             inst->read(inst->user_context, addr, val); \
-        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_abs_y(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
@@ -300,9 +298,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
         /* add Y to this address. */ \
         addr = ((addr_high << 8) | addr_low) + inst->reg_y; \
         /* fetch the value from the address. */ \
-        retval = \
+        return \
             inst->read(inst->user_context, addr, val); \
-        return STATUS_SUCCESS; \
     } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
