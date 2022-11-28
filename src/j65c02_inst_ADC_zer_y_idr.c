@@ -10,6 +10,7 @@
 #include "jemu65c02_internal.h"
 
 JEMU_IMPORT_jemu65c02;
+JEMU_IMPORT_jemu65c02_internal;
 
 /**
  * \brief Handle an ADC ZER Y IDR instruction.
@@ -27,40 +28,10 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_y_idr)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
-    uint8_t offL = 0;
-    uint8_t offH = 0;
-    uint8_t addrL = 0;
-    uint8_t addrH = 0;
     uint8_t rhs = 0;
 
-    /* fetch the zero-page offset. */
-    retval = inst->read(inst->user_context, inst->reg_pc++, &offL);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
-    /* set the high offset to be one plus the low offset. */
-    offH = offL + 1;
-
-    /* fetch the low address. */
-    retval = inst->read(inst->user_context, offL, &addrL);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
-    /* fetch the high address. */
-    retval = inst->read(inst->user_context, offH, &addrH);
-    if (STATUS_SUCCESS != retval)
-    {
-        return retval;
-    }
-
     /* fetch the value. */
-    retval =
-        inst->read(
-            inst->user_context, (addrH << 8) + addrL + inst->reg_y, &rhs);
+    retval = j65c02_addr_zer_y_idr(inst, &rhs);
     if (STATUS_SUCCESS != retval)
     {
         return retval;

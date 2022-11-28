@@ -360,6 +360,24 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_NOP)(
         /* fetch the value. */ \
         return inst->read(inst->user_context, (addrH << 8) | addrL, val); \
     } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_zer_y_idr(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+        JEMU_SYM(status) retval; \
+        uint8_t offset, addrL, addrH; \
+        /* fetch the zero-page index. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &offset); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the low address. */ \
+        retval = inst->read(inst->user_context, offset++, &addrL); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the high address. */ \
+        retval = inst->read(inst->user_context, offset++, &addrH); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the value. */ \
+        return \
+            inst->read( \
+                inst->user_context, (addrH << 8) + addrL + inst->reg_y, val); \
+    } \
     JEMU_END_EXPORT \
     REQUIRE_SEMICOLON_HERE
 #define JEMU_IMPORT_jemu65c02_internal_as(sym) \
