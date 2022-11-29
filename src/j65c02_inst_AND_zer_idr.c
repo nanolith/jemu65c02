@@ -30,6 +30,13 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_idr)(
     status retval;
     uint8_t rhs;
 
+    /* this instruction is invalid on MOS silicon. */
+    if (JEMU_65c02_PERSONALITY_MOS == inst->personality)
+    {
+        inst->crash = true;
+        return JEMU_ERROR_INVALID_OPCODE;
+    }
+
     /* fetch the value. */
     retval = j65c02_addr_zer_idr(inst, &rhs);
     if (STATUS_SUCCESS != retval)
