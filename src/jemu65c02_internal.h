@@ -471,7 +471,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
-    sym ## j65c02_addr_zer_x(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+    sym ## j65c02_addr_zer_x(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
         JEMU_SYM(status) retval; \
         uint8_t offset; \
         /* fetch the zero-page index. */ \
@@ -479,8 +479,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         if (STATUS_SUCCESS != retval) return retval; \
         /* increment the offset by X. */ \
         offset += inst->reg_x; \
-        /* fetch the value. */ \
-        return inst->read(inst->user_context, offset, val); \
+        *addr = offset; \
+        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_zer_x_idr(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
