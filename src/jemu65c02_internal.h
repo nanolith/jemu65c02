@@ -440,9 +440,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
-    sym ## j65c02_addr_imm(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
-        /* fetch the immediate value. */ \
-        return inst->read(inst->user_context, inst->reg_pc++, val); \
+    sym ## j65c02_addr_imm(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
+        *addr = inst->reg_pc++; \
+        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_zer(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
