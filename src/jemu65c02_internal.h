@@ -426,10 +426,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
-    sym ## j65c02_addr_abs_y(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+    sym ## j65c02_addr_abs_y(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
         JEMU_SYM(status) retval; \
         uint8_t addr_low, addr_high; \
-        uint16_t addr; \
         /* fetch the low part of the address. */ \
         retval = inst->read(inst->user_context, inst->reg_pc++, &addr_low); \
         if (STATUS_SUCCESS != retval) return retval; \
@@ -437,9 +436,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high); \
         if (STATUS_SUCCESS != retval) return retval; \
         /* add Y to this address. */ \
-        addr = ((addr_high << 8) | addr_low) + inst->reg_y; \
-        /* fetch the value from the address. */ \
-        return inst->read(inst->user_context, addr, val); \
+        *addr = ((addr_high << 8) | addr_low) + inst->reg_y; \
+        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_imm(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
