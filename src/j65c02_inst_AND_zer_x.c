@@ -1,7 +1,7 @@
 /**
- * \file j65c02_inst_ADC_zer_x.c
+ * \file j65c02_inst_AND_zer_x.c
  *
- * \brief Handle an ADC zer x instruction.
+ * \brief Handle an AND zer x instruction.
  *
  * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
@@ -13,7 +13,7 @@ JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
 /**
- * \brief Handle an ADC ZER X instruction.
+ * \brief Handle an AND ZER X instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -24,7 +24,7 @@ JEMU_IMPORT_jemu65c02_internal;
  *      - STATUS_SUCCESS on success.
  *      - a non-zero error code on failure.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_x)(
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_x)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
@@ -37,22 +37,11 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ADC_zer_x)(
         return retval;
     }
 
-    /* perform the ADC operation. */
-    JEMU_SYM(j65c02_op_ADC)(inst, rhs);
+    /* perform the AND operation. */
+    JEMU_SYM(j65c02_op_AND)(inst, rhs);
 
-    /* this mode normally takes 4 cycles. */
+    /* this mode takes 4 cycles. */
     *cycles = 4;
-
-    /* add a cycle if we are in BCD mode. */
-    if ((inst->reg_status & JEMU_65c02_STATUS_DECIMAL))
-    {
-        if (
-            inst->personality == JEMU_65c02_PERSONALITY_ROCKWELL
-         || inst->personality == JEMU_65c02_PERSONALITY_WDC)
-        {
-            *cycles += 1;
-        }
-    }
 
     return STATUS_SUCCESS;
 }
