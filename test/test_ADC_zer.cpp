@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(ADC_zer);
+TEST_SUITE(j65c02_ADC_zer);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
