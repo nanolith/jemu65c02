@@ -455,7 +455,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
-    sym ## j65c02_addr_zer_idr(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+    sym ## j65c02_addr_zer_idr(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
         JEMU_SYM(status) retval; \
         uint8_t offset, addr_low, addr_high; \
         /* fetch the zero-page index. */ \
@@ -467,9 +467,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
         /* fetch the high address from the zero-page. */ \
         retval = inst->read(inst->user_context, offset++, &addr_high); \
         if (STATUS_SUCCESS != retval) return retval; \
-        /* fetch the value. */ \
-        return \
-            inst->read(inst->user_context, (addr_high << 8) | addr_low, val); \
+        *addr = (addr_high << 8) | addr_low; \
+        return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_zer_x(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
