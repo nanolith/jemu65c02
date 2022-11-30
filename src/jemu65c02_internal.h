@@ -389,6 +389,31 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_x_idr)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_AND_zer_y_idr)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the ASL operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               Pointer to the value to shift.
+ */
+void JEMU_SYM(j65c02_op_ASL)(
+    JEMU_SYM(j65c02)* inst, uint8_t* val);
+
+/**
+ * \brief Handle an ASL A instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_ASL_a)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
