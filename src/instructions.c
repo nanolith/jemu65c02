@@ -526,8 +526,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xF0 - 0xFF. */
-    /* Opcode 0xF0 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xF0 - BEQ instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_BEQ), .max_cycles = 3 },
     /* Opcode 0xF1 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xF2 - TODO implement. */
