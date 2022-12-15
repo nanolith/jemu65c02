@@ -72,6 +72,20 @@ JEMU_SYM(j65c02_fetch)(
     uint8_t* val, JEMU_SYM(j65c02)* inst);
 
 /**
+ * \brief Push a value onto the stack, decrementing the stack pointer after.
+ *
+ * \param inst              The emulator instance on which this operation is
+ *                          performed.
+ * \param val               The value to push onto the stack.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_push)(JEMU_SYM(j65c02)* inst, uint8_t val);
+
+/**
  * \brief Handle an invalid opcode instruction by setting the crash flag.
  *
  * \param inst              The emulator instance on which this instruction
