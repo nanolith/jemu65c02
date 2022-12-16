@@ -772,6 +772,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_BRA)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_push(JEMU_SYM(j65c02)* inst, uint8_t val) { \
+        return JEMU_SYM(j65c02_push)(inst, val); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_zer_x_idr(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
         JEMU_SYM(status) retval; \
         uint8_t offset, addrL, addrH; \
