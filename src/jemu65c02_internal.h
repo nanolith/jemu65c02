@@ -86,6 +86,20 @@ JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_push)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
+ * \brief Compare two values, setting the status flags accordingly.
+ *
+ * \param inst              The emulator instance on which this operation is
+ *                          performed.
+ * \param lhs               The left-hand side of the comparison (A, X, Y, etc).
+ * \param rhs               The right-hand side of the comparison (e.g. memory).
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+void JEMU_SYM(j65c02_compare)(JEMU_SYM(j65c02)* inst, uint8_t lhs, uint8_t rhs);
+
+/**
  * \brief Handle an invalid opcode instruction by setting the crash flag.
  *
  * \param inst              The emulator instance on which this instruction
@@ -879,6 +893,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_CLV)(
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_push(JEMU_SYM(j65c02)* inst, uint8_t val) { \
         return JEMU_SYM(j65c02_push)(inst, val); } \
+    static inline void sym ## j65c02_compare( \
+        JEMU_SYM(j65c02)* inst, uint8_t lhs, uint8_t rhs) { \
+        JEMU_SYM(j65c02_compare)(inst, lhs, rhs); } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_addr_zer_x_idr(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
         JEMU_SYM(status) retval; \
