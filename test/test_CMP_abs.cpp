@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_CMP_imm);
+TEST_SUITE(j65c02_CMP_abs);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,9 +25,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0xC9 CMP IMM (comparing two equal values).
+ * 0xCD CMP ABS (comparing two equal values).
  */
-TEST(step_CMP_imm_equal)
+TEST(step_CMP_abs_equal)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -42,8 +42,12 @@ TEST(step_CMP_imm_equal)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a CMP instruction. */
-    mem[0x1000] = 0xC9;
-    mem[0x1001] = EXPECTED_CMP_INPUT;
+    mem[0x1000] = 0xCD;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, set the CMP input. */
+    mem[0x2000] = EXPECTED_CMP_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -80,8 +84,8 @@ TEST(step_CMP_imm_equal)
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: the zero flag is set. */
     TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO);
@@ -97,9 +101,9 @@ TEST(step_CMP_imm_equal)
 }
 
 /**
- * 0xC9 CMP IMM (comparing a lesser value).
+ * 0xCD CMP ABS (comparing a lesser value).
  */
-TEST(step_CMP_imm_lesser)
+TEST(step_CMP_abs_lesser)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -114,8 +118,12 @@ TEST(step_CMP_imm_lesser)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a CMP instruction. */
-    mem[0x1000] = 0xC9;
-    mem[0x1001] = EXPECTED_CMP_INPUT;
+    mem[0x1000] = 0xCD;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, set the CMP input. */
+    mem[0x2000] = EXPECTED_CMP_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -152,8 +160,8 @@ TEST(step_CMP_imm_lesser)
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: the zero flag is clear. */
     TEST_EXPECT(!(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -169,9 +177,9 @@ TEST(step_CMP_imm_lesser)
 }
 
 /**
- * 0xC9 CMP IMM (comparing a greater value).
+ * 0xCD CMP ABS (comparing a greater value).
  */
-TEST(step_CMP_imm_greater)
+TEST(step_CMP_abs_greater)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -186,8 +194,12 @@ TEST(step_CMP_imm_greater)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a CMP instruction. */
-    mem[0x1000] = 0xC9;
-    mem[0x1001] = EXPECTED_CMP_INPUT;
+    mem[0x1000] = 0xCD;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, set the CMP input. */
+    mem[0x2000] = EXPECTED_CMP_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -224,8 +236,8 @@ TEST(step_CMP_imm_greater)
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: the zero flag is clear. */
     TEST_EXPECT(!(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
