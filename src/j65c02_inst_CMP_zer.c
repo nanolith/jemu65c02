@@ -1,7 +1,7 @@
 /**
- * \file j65c02_inst_CMP_abs.c
+ * \file j65c02_inst_CMP_zer.c
  *
- * \brief Handle a CMP abs instruction.
+ * \brief Handle a CMP zer instruction.
  *
  * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
@@ -13,7 +13,7 @@ JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
 /**
- * \brief Handle a CMP ABS instruction.
+ * \brief Handle a CMP ZER instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -24,7 +24,7 @@ JEMU_IMPORT_jemu65c02_internal;
  *      - STATUS_SUCCESS on success.
  *      - a non-zero error code on failure.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_abs)(
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_zer)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
@@ -32,7 +32,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_abs)(
     uint16_t addr;
 
     /* fetch the address. */
-    retval = j65c02_addr_abs(inst, &addr);
+    retval = j65c02_addr_zer(inst, &addr);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
@@ -48,8 +48,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_abs)(
     /* perform the comparison. */
     JEMU_SYM(j65c02_compare)(inst, j65c02_reg_a_get(inst), rhs);
 
-    /* this mode takes 4 cycles. */
-    *cycles = 4;
+    /* this mode takes 3 cycles. */
+    *cycles = 3;
 
     return STATUS_SUCCESS;
 }
