@@ -812,6 +812,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_CLV)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_imm)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Handle a CMP ABS instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_CMP_abs)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
