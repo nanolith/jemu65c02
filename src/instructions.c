@@ -304,8 +304,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x87 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x88 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x88 - DEY instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_DEY), .max_cycles = 2 },
     /* Opcode 0x89 - BIT IMM instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BIT_imm), .max_cycles = 2 },
     /* Opcode 0x8A - TODO implement. */
