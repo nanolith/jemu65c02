@@ -470,8 +470,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xD5 - CMP ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer_x), .max_cycles = 4 },
-    /* Opcode 0xD6 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xD6 - DEC ZER X instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_DEC_zer_x), .max_cycles = 6 },
     /* Opcode 0xD7 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xD8 - CLD instruction. */
