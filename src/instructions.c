@@ -452,8 +452,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CPY_abs), .max_cycles = 4 },
     /* Opcode 0xCD - CMP ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_abs), .max_cycles = 4 },
-    /* Opcode 0xCE - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xCE - DEC abs instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_DEC_abs), .max_cycles = 6 },
     /* Opcode 0xCF - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
