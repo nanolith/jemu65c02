@@ -138,8 +138,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x39 - AND ABS Y instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_AND_abs_y), .max_cycles = 4 },
-    /* Opcode 0x3A - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x3A - DEC A instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_DEC_a), .max_cycles = 2 },
     /* Opcode 0x3B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x3C - BIT ABS X instruction. */
