@@ -1127,6 +1127,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_DEX)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_DEY)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the EOR operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to exclusive-OR with the accumulator.
+ */
+void JEMU_SYM(j65c02_op_EOR)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
