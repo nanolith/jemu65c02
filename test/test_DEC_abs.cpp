@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_DEC_a);
+TEST_SUITE(j65c02_DEC_abs);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,9 +25,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x3A DEC a (non-zero / non-negative to non-zero / non-negative).
+ * 0xCE DEC abs (non-zero / non-negative to non-zero / non-negative).
  */
-TEST(step_DEC_a_non_zero_non_negative)
+TEST(step_DEC_abs_non_zero_non_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -40,7 +40,12 @@ TEST(step_DEC_a_non_zero_non_negative)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a DEC instruction. */
-    mem[0x1000] = 0x3A;
+    mem[0x1000] = 0xCE;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add our value to decrement. */
+    mem[0x2000] = 0x02;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -64,20 +69,17 @@ TEST(step_DEC_a_non_zero_non_negative)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_NEGATIVE);
 
-    /* PRECONDITION: set the A register. */
-    j65c02_reg_a_set(inst, 0x02);
-
     /* PRECONDITION: PC is 0x1000. */
     TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
 
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1001. */
-    TEST_EXPECT(0x1001 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: A is 0x01. */
-    TEST_EXPECT(0x01 == j65c02_reg_a_get(inst));
+    /* POSTCONDITION: mem[0x2000] is 0x01. */
+    TEST_EXPECT(0x01 == mem[0x2000]);
 
     /* POSTCONDITION: the zero flag is clear. */
     TEST_EXPECT(!(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -90,9 +92,9 @@ TEST(step_DEC_a_non_zero_non_negative)
 }
 
 /**
- * 0x3A DEC a (0x01 to zero).
+ * 0xCE DEC abs (0x01 to zero).
  */
-TEST(step_DEC_a_zero)
+TEST(step_DEC_abs_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -105,7 +107,12 @@ TEST(step_DEC_a_zero)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a DEC instruction. */
-    mem[0x1000] = 0x3A;
+    mem[0x1000] = 0xCE;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add the value to decrement. */
+    mem[0x2000] = 0x01;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -129,20 +136,17 @@ TEST(step_DEC_a_zero)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_NEGATIVE);
 
-    /* PRECONDITION: set the A register. */
-    j65c02_reg_a_set(inst, 0x01);
-
     /* PRECONDITION: PC is 0x1000. */
     TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
 
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1001. */
-    TEST_EXPECT(0x1001 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: A is 0x00. */
-    TEST_EXPECT(0x00 == j65c02_reg_a_get(inst));
+    /* POSTCONDITION: mem[0x2000] is 0x00. */
+    TEST_EXPECT(0x00 == mem[0x2000]);
 
     /* POSTCONDITION: the zero flag is set. */
     TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO);
@@ -155,9 +159,9 @@ TEST(step_DEC_a_zero)
 }
 
 /**
- * 0x3A DEC a (0x00 to 0xFF).
+ * 0xCE DEC abs (0x00 to 0xFF).
  */
-TEST(step_DEC_a_negative)
+TEST(step_DEC_abs_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -170,7 +174,12 @@ TEST(step_DEC_a_negative)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a DEC instruction. */
-    mem[0x1000] = 0x3A;
+    mem[0x1000] = 0xCE;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add the value to decrement. */
+    mem[0x2000] = 0x00;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -194,20 +203,17 @@ TEST(step_DEC_a_negative)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_NEGATIVE);
 
-    /* PRECONDITION: set the A register. */
-    j65c02_reg_a_set(inst, 0x00);
-
     /* PRECONDITION: PC is 0x1000. */
     TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
 
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x1001. */
-    TEST_EXPECT(0x1001 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: A is 0xFF. */
-    TEST_EXPECT(0xFF == j65c02_reg_a_get(inst));
+    /* POSTCONDITION: mem[0x2000] is 0xFF. */
+    TEST_EXPECT(0xFF == mem[0x2000]);
 
     /* POSTCONDITION: the zero flag is clear. */
     TEST_EXPECT(!(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
