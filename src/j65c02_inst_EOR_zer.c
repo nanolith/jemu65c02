@@ -1,7 +1,7 @@
 /**
- * \file j65c02_inst_EOR_abs.c
+ * \file j65c02_inst_EOR_zer.c
  *
- * \brief Handle an EOR abs instruction.
+ * \brief Handle an EOR zer instruction.
  *
  * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
@@ -13,7 +13,7 @@ JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
 /**
- * \brief Handle an EOR ABS instruction.
+ * \brief Handle an EOR ZER instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -24,7 +24,7 @@ JEMU_IMPORT_jemu65c02_internal;
  *      - STATUS_SUCCESS on success.
  *      - a non-zero error code on failure.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs)(
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_zer)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
@@ -32,7 +32,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs)(
     uint16_t addr;
 
     /* fetch the address. */
-    retval = j65c02_addr_abs(inst, &addr);
+    retval = j65c02_addr_zer(inst, &addr);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
@@ -48,8 +48,8 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs)(
     /* perform the EOR operation. */
     JEMU_SYM(j65c02_op_EOR)(inst, rhs);
 
-    /* this instruction takes 4 cycles. */
-    *cycles = 4;
+    /* this instruction takes 3 cycles. */
+    *cycles = 3;
 
     return STATUS_SUCCESS;
 }

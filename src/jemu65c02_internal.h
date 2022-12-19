@@ -1138,7 +1138,7 @@ void JEMU_SYM(j65c02_op_EOR)(
     JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
- * \brief Handle a EOR IMM instruction.
+ * \brief Handle an EOR IMM instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -1153,7 +1153,7 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_imm)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
 /**
- * \brief Handle a EOR ABS instruction.
+ * \brief Handle an EOR ABS instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -1165,6 +1165,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_imm)(
  *      - a non-zero error code on failure.
  */
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
+/**
+ * \brief Handle an EOR ZER instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_zer)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
 /******************************************************************************/
