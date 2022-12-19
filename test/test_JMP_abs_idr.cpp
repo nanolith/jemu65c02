@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_JMP_abs);
+TEST_SUITE(j65c02_JMP_abs_idr);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,9 +25,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x4C JMP abs instruction.
+ * 0x6C JMP abs idr instruction.
  */
-TEST(step_JMP_abs)
+TEST(step_JMP_abs_idr)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -40,9 +40,13 @@ TEST(step_JMP_abs)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add a JMP instruction. */
-    mem[0x1000] = 0x4C;
+    mem[0x1000] = 0x6C;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x20;
+
+    /* at 0x2000, set the true jump location. */
+    mem[0x2000] = 0x80;
+    mem[0x2001] = 0x40;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -64,8 +68,8 @@ TEST(step_JMP_abs)
     /* single step. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
-    /* POSTCONDITION: PC is 0x2000. */
-    TEST_EXPECT(0x2000 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is 0x4080. */
+    TEST_EXPECT(0x4080 == j65c02_reg_pc_get(inst));
 
     /* clean up. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
