@@ -1212,6 +1212,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_zer_idr)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs_x)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Handle an EOR ABS Y instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_EOR_abs_y)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
