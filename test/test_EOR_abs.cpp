@@ -6,7 +6,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_EOR_imm);
+TEST_SUITE(j65c02_EOR_abs);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -27,9 +27,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x49 EOR imm normal result (not negative or zero).
+ * 0x4D EOR abs normal result (not negative or zero).
  */
-TEST(step_EOR_imm_basics)
+TEST(step_EOR_abs_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -45,8 +45,12 @@ TEST(step_EOR_imm_basics)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an EOR instruction. */
-    mem[0x1000] = 0x49;
-    mem[0x1001] = EXPECTED_EOR_INPUT;
+    mem[0x1000] = 0x4D;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add the EOR input. */
+    mem[0x2000] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -82,8 +86,8 @@ TEST(step_EOR_imm_basics)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: A is set to the expected output. */
     TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
@@ -100,9 +104,9 @@ TEST(step_EOR_imm_basics)
 }
 
 /**
- * 0x49 EOR imm Zero result.
+ * 0x4D EOR abs Zero result.
  */
-TEST(step_EOR_imm_zero)
+TEST(step_EOR_abs_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -118,8 +122,12 @@ TEST(step_EOR_imm_zero)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an EOR instruction. */
-    mem[0x1000] = 0x49;
-    mem[0x1001] = EXPECTED_EOR_INPUT;
+    mem[0x1000] = 0x4D;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add the EOR input. */
+    mem[0x2000] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -155,8 +163,8 @@ TEST(step_EOR_imm_zero)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: A is set to the expected output. */
     TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
@@ -173,9 +181,9 @@ TEST(step_EOR_imm_zero)
 }
 
 /**
- * 0x49 EOR imm, the negative flag is set.
+ * 0x4D EOR abs, the negative flag is set.
  */
-TEST(step_EOR_imm_negative)
+TEST(step_EOR_abs_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -191,8 +199,12 @@ TEST(step_EOR_imm_negative)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an EOR instruction. */
-    mem[0x1000] = 0x49;
-    mem[0x1001] = EXPECTED_EOR_INPUT;
+    mem[0x1000] = 0x4D;
+    mem[0x1001] = 0x00;
+    mem[0x1002] = 0x20;
+
+    /* at 0x2000, add the EOR input. */
+    mem[0x2000] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -228,8 +240,8 @@ TEST(step_EOR_imm_negative)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1002. */
-    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1003. */
+    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
     /* POSTCONDITION: A is set to the expected output. */
     TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
