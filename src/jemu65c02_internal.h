@@ -1392,6 +1392,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_INY)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_JMP_abs)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Handle a JMP ABS IDR instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_JMP_abs_idr)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
@@ -1412,6 +1427,28 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_JMP_abs)(
         retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high); \
         if (STATUS_SUCCESS != retval) return retval; \
         *addr = addr_high << 8 | addr_low; \
+        return STATUS_SUCCESS; \
+    } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_abs_idr(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
+        JEMU_SYM(status) retval; \
+        uint8_t addr_low, addr_high; \
+        uint16_t tmp; \
+        uint8_t eff_low, eff_high; \
+        /* fetch the low part of the address. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &addr_low); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the high part of the address. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &addr_high); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        tmp = addr_high << 8 | addr_low; \
+        /* fetch the low part of the real address. */ \
+        retval = inst->read(inst->user_context, tmp, &eff_low); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* fetch the high part of the real address. */ \
+        retval = inst->read(inst->user_context, tmp+1, &eff_high); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        *addr = eff_high << 8 | eff_low; \
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
