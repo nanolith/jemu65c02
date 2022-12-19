@@ -27,12 +27,15 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * EOR Normal result (not negative or zero).
+ * 0x49 EOR imm normal result (not negative or zero).
  */
-TEST(EOR_basics)
+TEST(step_EOR_imm_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
+    const uint8_t EXPECTED_A_VALUE = 0x10;
+    const uint8_t EXPECTED_EOR_INPUT = 0x7F;
+    const uint8_t EXPECTED_OUTPUT = EXPECTED_A_VALUE ^ EXPECTED_EOR_INPUT;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -40,6 +43,10 @@ TEST(EOR_basics)
     /* set the reset vector. */
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
+
+    /* at 0x1000, add an EOR instruction. */
+    mem[0x1000] = 0x49;
+    mem[0x1001] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -55,8 +62,8 @@ TEST(EOR_basics)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: A is set to 0x7F. */
-    j65c02_reg_a_set(inst, 0x7F);
+    /* PRECONDITION: A is set to the expected A value. */
+    j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
     /* PRECONDITION: set the zero flag. */
     j65c02_reg_status_set(
@@ -66,14 +73,20 @@ TEST(EOR_basics)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_NEGATIVE);
 
-    /* run the EOR operation. */
-    JEMU_SYM(j65c02_op_EOR)(inst, 0x10);
+    /* PRECONDITON: PC is set to 0x1000. */
+    TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
+
+    /* single step. */
+    TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: A is set to the EOR sum. */
-    TEST_EXPECT(j65c02_reg_a_get(inst) == (0x7F ^ 0x10));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+
+    /* POSTCONDITION: A is set to the expected output. */
+    TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -87,12 +100,15 @@ TEST(EOR_basics)
 }
 
 /**
- * EOR Zero result.
+ * 0x49 EOR imm Zero result.
  */
-TEST(EOR_zero)
+TEST(step_EOR_imm_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
+    const uint8_t EXPECTED_A_VALUE = 0xFF;
+    const uint8_t EXPECTED_EOR_INPUT = 0xFF;
+    const uint8_t EXPECTED_OUTPUT = EXPECTED_A_VALUE ^ EXPECTED_EOR_INPUT;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -100,6 +116,10 @@ TEST(EOR_zero)
     /* set the reset vector. */
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
+
+    /* at 0x1000, add an EOR instruction. */
+    mem[0x1000] = 0x49;
+    mem[0x1001] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -115,8 +135,8 @@ TEST(EOR_zero)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: A is set to 0xFF. */
-    j65c02_reg_a_set(inst, 0xFF);
+    /* PRECONDITION: A is set to the expected A value. */
+    j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
     /* PRECONDITION: clear the zero flag. */
     j65c02_reg_status_set(
@@ -126,14 +146,20 @@ TEST(EOR_zero)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_NEGATIVE);
 
-    /* run the EOR operation. */
-    JEMU_SYM(j65c02_op_EOR)(inst, 0xFF);
+    /* PRECONDITON: PC is set to 0x1000. */
+    TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
+
+    /* single step. */
+    TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: A is set to the EOR sum. */
-    TEST_EXPECT(j65c02_reg_a_get(inst) == (0xFF ^ 0xFF));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+
+    /* POSTCONDITION: A is set to the expected output. */
+    TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
 
     /* POSTCONDITION: the zero flag is set. */
     TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO);
@@ -153,6 +179,9 @@ TEST(EOR_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
+    const uint8_t EXPECTED_A_VALUE = 0x80;
+    const uint8_t EXPECTED_EOR_INPUT = 0x00;
+    const uint8_t EXPECTED_OUTPUT = EXPECTED_A_VALUE ^ EXPECTED_EOR_INPUT;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -160,6 +189,10 @@ TEST(EOR_negative)
     /* set the reset vector. */
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
+
+    /* at 0x1000, add an EOR instruction. */
+    mem[0x1000] = 0x49;
+    mem[0x1001] = EXPECTED_EOR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -175,8 +208,8 @@ TEST(EOR_negative)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: A is set to 0x80. */
-    j65c02_reg_a_set(inst, 0x80);
+    /* PRECONDITION: A is set to the expected A value. */
+    j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
 
     /* PRECONDITION: set the zero flag. */
     j65c02_reg_status_set(
@@ -186,14 +219,20 @@ TEST(EOR_negative)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_NEGATIVE);
 
-    /* run the EOR operation. */
-    JEMU_SYM(j65c02_op_EOR)(inst, 0x00);
+    /* PRECONDITON: PC is set to 0x1000. */
+    TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
+
+    /* single step. */
+    TEST_ASSERT(STATUS_SUCCESS == j65c02_step(inst));
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: A is set to the EOR sum. */
-    TEST_EXPECT(j65c02_reg_a_get(inst) == (0x80 ^ 0x00));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
+
+    /* POSTCONDITION: A is set to the expected output. */
+    TEST_EXPECT(j65c02_reg_a_get(inst) == EXPECTED_OUTPUT);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
