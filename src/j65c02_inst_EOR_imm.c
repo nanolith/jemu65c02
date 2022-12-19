@@ -13,7 +13,7 @@ JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
 /**
- * \brief Handle a EOR IMM instruction.
+ * \brief Handle an EOR IMM instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
