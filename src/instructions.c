@@ -70,8 +70,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CLC), .max_cycles = 2 },
     /* Opcode 0x19 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x1A - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x1A - INC A instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_INC_a), .max_cycles = 2 },
     /* Opcode 0x1B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x1C - TODO implement. */
