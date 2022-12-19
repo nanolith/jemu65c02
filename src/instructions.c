@@ -278,8 +278,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x7B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x7C - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x7C - JMP abs x idr. */
+    { .exec = &JEMU_SYM(j65c02_inst_JMP_abs_x_idr), .max_cycles = 6 },
     /* Opcode 0x7D - ADC ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ADC_abs_x), .max_cycles = 5 },
     /* Opcode 0x7E - TODO implement. */
