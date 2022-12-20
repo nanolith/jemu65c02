@@ -360,8 +360,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xA1 - LDA ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0xA2 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xA2 - LDX imm instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_LDX_imm), .max_cycles = 2 },
     /* Opcode 0xA3 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xA4 - TODO implement. */
