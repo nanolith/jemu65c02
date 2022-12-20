@@ -1582,6 +1582,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDA_zer_x_idr)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDA_zer_y_idr)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the LDX operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to exclusive-OR with the accumulator.
+ */
+void JEMU_SYM(j65c02_op_LDX)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
