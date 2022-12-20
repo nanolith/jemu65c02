@@ -6,7 +6,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_LDA_zer_x_idr);
+TEST_SUITE(j65c02_LDA_zer_y_idr);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -27,9 +27,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0xA1 LDA zer x idr normal result (not negative or zero).
+ * 0xB1 LDA zer y idr normal result (not negative or zero).
  */
-TEST(step_LDA_zer_x_idr_basics)
+TEST(step_LDA_zer_y_idr_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -43,15 +43,15 @@ TEST(step_LDA_zer_x_idr_basics)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LDA instruction. */
-    mem[0x1000] = 0xA1;
+    mem[0x1000] = 0xB1;
     mem[0x1001] = 0x05;
 
-    /* at 0x000A, set the input address. */
-    mem[0x000A] = 0x00;
-    mem[0x000B] = 0x20;
+    /* at 0x0005, set the input address. */
+    mem[0x0005] = 0x00;
+    mem[0x0006] = 0x20;
 
-    /* at 0x2000, add the LDA input. */
-    mem[0x2000] = EXPECTED_LDA_INPUT;
+    /* at 0x2005, add the LDA input. */
+    mem[0x2005] = EXPECTED_LDA_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -70,8 +70,8 @@ TEST(step_LDA_zer_x_idr_basics)
     /* PRECONDITION: A is set to 0x00. */
     j65c02_reg_a_set(inst, 0x00);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: set the zero flag. */
     j65c02_reg_status_set(
@@ -108,9 +108,9 @@ TEST(step_LDA_zer_x_idr_basics)
 }
 
 /**
- * 0xA1 LDA zer x idr Zero result.
+ * 0xB1 LDA zer y idr Zero result.
  */
-TEST(step_LDA_zer_x_idr_zero)
+TEST(step_LDA_zer_y_idr_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -124,15 +124,15 @@ TEST(step_LDA_zer_x_idr_zero)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LDA instruction. */
-    mem[0x1000] = 0xA1;
+    mem[0x1000] = 0xB1;
     mem[0x1001] = 0x05;
 
-    /* at 0x000A, set the input address. */
-    mem[0x000A] = 0x00;
-    mem[0x000B] = 0x20;
+    /* at 0x0005, set the input address. */
+    mem[0x0005] = 0x00;
+    mem[0x0006] = 0x20;
 
-    /* at 0x2000, add the LDA input. */
-    mem[0x2000] = EXPECTED_LDA_INPUT;
+    /* at 0x2005, add the LDA input. */
+    mem[0x2005] = EXPECTED_LDA_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -151,8 +151,8 @@ TEST(step_LDA_zer_x_idr_zero)
     /* PRECONDITION: A is set to 0xFF. */
     j65c02_reg_a_set(inst, 0xFF);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: clear the zero flag. */
     j65c02_reg_status_set(
@@ -189,9 +189,9 @@ TEST(step_LDA_zer_x_idr_zero)
 }
 
 /**
- * 0xA1 LDA zer x idr, the negative flag is set.
+ * 0xB1 LDA zer y idr, the negative flag is set.
  */
-TEST(step_LDA_zer_x_idr_negative)
+TEST(step_LDA_zer_y_idr_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -205,15 +205,15 @@ TEST(step_LDA_zer_x_idr_negative)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LDA instruction. */
-    mem[0x1000] = 0xA1;
+    mem[0x1000] = 0xB1;
     mem[0x1001] = 0x05;
 
-    /* at 0x000A, set the input address. */
-    mem[0x000A] = 0x00;
-    mem[0x000B] = 0x20;
+    /* at 0x0005, set the input address. */
+    mem[0x0005] = 0x00;
+    mem[0x0006] = 0x20;
 
-    /* at 0x2000, add the LDA input. */
-    mem[0x2000] = EXPECTED_LDA_INPUT;
+    /* at 0x2005, add the LDA input. */
+    mem[0x2005] = EXPECTED_LDA_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -232,8 +232,8 @@ TEST(step_LDA_zer_x_idr_negative)
     /* PRECONDITION: A is set to 0x00. */
     j65c02_reg_a_set(inst, 0x00);
 
-    /* PRECONDITION: X is set to 0x05. */
-    j65c02_reg_x_set(inst, 0x05);
+    /* PRECONDITION: Y is set to 0x05. */
+    j65c02_reg_y_set(inst, 0x05);
 
     /* PRECONDITION: set the zero flag. */
     j65c02_reg_status_set(
