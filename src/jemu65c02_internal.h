@@ -1667,6 +1667,31 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDX_abs_y)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDX_zer_y)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the LDY operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to exclusive-OR with the accumulator.
+ */
+void JEMU_SYM(j65c02_op_LDY)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
+/**
+ * \brief Handle an LDY IMM instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDY_imm)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
