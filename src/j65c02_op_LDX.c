@@ -1,0 +1,46 @@
+/**
+ * \file j65c02_op_LDX.c
+ *
+ * \brief Perform the LDX operation.
+ *
+ * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
+ * distribution for the license terms under which this software is distributed.
+ */
+
+#include "jemu65c02_internal.h"
+
+JEMU_IMPORT_jemu65c02;
+
+/**
+ * \brief Perform the LDX operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to exclusive-OR with the accumulator.
+ */
+void JEMU_SYM(j65c02_op_LDX)(
+    JEMU_SYM(j65c02)* inst, uint8_t val)
+{
+    /* set x to val. */
+    inst->reg_x = val;
+
+    /* set the negative flag if the MSB is set. */
+    if (inst->reg_x & 0x80)
+    {
+        inst->reg_status |= JEMU_65c02_STATUS_NEGATIVE;
+    }
+    else
+    {
+        inst->reg_status &= ~JEMU_65c02_STATUS_NEGATIVE;
+    }
+
+    /* set the zero flag if the X register is zero. */
+    if (!inst->reg_x)
+    {
+        inst->reg_status |= JEMU_65c02_STATUS_ZERO;
+    }
+    else
+    {
+        inst->reg_status &= ~JEMU_65c02_STATUS_ZERO;
+    }
+}
