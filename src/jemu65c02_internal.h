@@ -1722,6 +1722,18 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDA_zer_y_idr)(
         return STATUS_SUCCESS; \
     } \
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_addr_zer_y(JEMU_SYM(j65c02)* inst, uint16_t* addr) { \
+        JEMU_SYM(status) retval; \
+        uint8_t offset; \
+        /* fetch the zero-page index. */ \
+        retval = inst->read(inst->user_context, inst->reg_pc++, &offset); \
+        if (STATUS_SUCCESS != retval) return retval; \
+        /* increment the offset by Y. */ \
+        offset += inst->reg_y; \
+        *addr = offset; \
+        return STATUS_SUCCESS; \
+    } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_push(JEMU_SYM(j65c02)* inst, uint8_t val) { \
         return JEMU_SYM(j65c02_push)(inst, val); } \
     static inline void sym ## j65c02_compare( \
