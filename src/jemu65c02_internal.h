@@ -1447,6 +1447,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_JSR)(
 void JEMU_SYM(j65c02_op_LDA)(
     JEMU_SYM(j65c02)* inst, uint8_t val);
 
+/**
+ * \brief Handle an LDA IMM instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDA_imm)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
