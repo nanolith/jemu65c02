@@ -1837,6 +1837,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LSR_abs_x)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_LSR_zer_x)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the ORA operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value for this operation.
+ */
+void JEMU_SYM(j65c02_op_ORA)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
