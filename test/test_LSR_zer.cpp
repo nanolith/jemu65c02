@@ -6,7 +6,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_LSR_abs);
+TEST_SUITE(j65c02_LSR_zer);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -27,9 +27,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x4E LSR abs Normal result (not zero; no carry).
+ * 0x46 LSR zer Normal result (not zero; no carry).
  */
-TEST(step_LSR_abs_basics)
+TEST(step_LSR_zer_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -44,12 +44,11 @@ TEST(step_LSR_abs_basics)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LSR instruction. */
-    mem[0x1000] = 0x4E;
-    mem[0x1001] = 0x00;
-    mem[0x1002] = 0x20;
+    mem[0x1000] = 0x46;
+    mem[0x1001] = 0x05;
 
-    /* at 0x2000, add the LSR input. */
-    mem[0x2000] = EXPECTED_LSR_INPUT;
+    /* at 0x0005, add the LSR input. */
+    mem[0x0005] = EXPECTED_LSR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -83,11 +82,11 @@ TEST(step_LSR_abs_basics)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1003. */
-    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: mem[0x2000] is set to the expected output. */
-    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x2000]);
+    /* POSTCONDITION: mem[0x0005] is set to the expected output. */
+    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x0005]);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -105,9 +104,9 @@ TEST(step_LSR_abs_basics)
 }
 
 /**
- * 0x4E LSR abs high bit set to zero. (not zero; no carry).
+ * 0x46 LSR zer high bit set to zero. (not zero; no carry).
  */
-TEST(step_LSR_abs_high_bit)
+TEST(step_LSR_zer_high_bit)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -122,12 +121,11 @@ TEST(step_LSR_abs_high_bit)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LSR instruction. */
-    mem[0x1000] = 0x4E;
-    mem[0x1001] = 0x00;
-    mem[0x1002] = 0x20;
+    mem[0x1000] = 0x46;
+    mem[0x1001] = 0x05;
 
-    /* at 0x2000, add the LSR input. */
-    mem[0x2000] = EXPECTED_LSR_INPUT;
+    /* at 0x0005, add the LSR input. */
+    mem[0x0005] = EXPECTED_LSR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -161,11 +159,11 @@ TEST(step_LSR_abs_high_bit)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1003. */
-    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: mem[0x2000] is set to the expected output. */
-    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x2000]);
+    /* POSTCONDITION: mem[0x0005] is set to the expected output. */
+    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x0005]);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -183,9 +181,9 @@ TEST(step_LSR_abs_high_bit)
 }
 
 /**
- * 0x4E LSR abs shift low bit to carry, not zero.
+ * 0x46 LSR zer shift low bit to carry, not zero.
  */
-TEST(step_LSR_abs_low_bit_carry)
+TEST(step_LSR_zer_low_bit_carry)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -200,12 +198,11 @@ TEST(step_LSR_abs_low_bit_carry)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LSR instruction. */
-    mem[0x1000] = 0x4E;
-    mem[0x1001] = 0x00;
-    mem[0x1002] = 0x20;
+    mem[0x1000] = 0x46;
+    mem[0x1001] = 0x05;
 
-    /* at 0x2000, add the LSR input. */
-    mem[0x2000] = EXPECTED_LSR_INPUT;
+    /* at 0x0005, add the LSR input. */
+    mem[0x0005] = EXPECTED_LSR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -239,11 +236,11 @@ TEST(step_LSR_abs_low_bit_carry)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1003. */
-    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: mem[0x2000] is set to the expected output. */
-    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x2000]);
+    /* POSTCONDITION: mem[0x0005] is set to the expected output. */
+    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x0005]);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -260,9 +257,9 @@ TEST(step_LSR_abs_low_bit_carry)
 }
 
 /**
- * 0x4E LSR abs shift low bit to carry, zero.
+ * 0x46 LSR zer shift low bit to carry, zero.
  */
-TEST(step_LSR_abs_low_bit_carry_zero)
+TEST(step_LSR_zer_low_bit_carry_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -277,12 +274,11 @@ TEST(step_LSR_abs_low_bit_carry_zero)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LSR instruction. */
-    mem[0x1000] = 0x4E;
-    mem[0x1001] = 0x00;
-    mem[0x1002] = 0x20;
+    mem[0x1000] = 0x46;
+    mem[0x1001] = 0x05;
 
-    /* at 0x2000, add the LSR input. */
-    mem[0x2000] = EXPECTED_LSR_INPUT;
+    /* at 0x0005, add the LSR input. */
+    mem[0x0005] = EXPECTED_LSR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -316,11 +312,11 @@ TEST(step_LSR_abs_low_bit_carry_zero)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1003. */
-    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: mem[0x2000] is set to the expected output. */
-    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x2000]);
+    /* POSTCONDITION: mem[0x0005] is set to the expected output. */
+    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x0005]);
 
     /* POSTCONDITION: the zero flag is set. */
     TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO);
@@ -337,9 +333,9 @@ TEST(step_LSR_abs_low_bit_carry_zero)
 }
 
 /**
- * 0x4E LSR abs shift zero is zero.
+ * 0x46 LSR zer shift zero is zero.
  */
-TEST(step_LSR_abs_zero)
+TEST(step_LSR_zer_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -354,12 +350,11 @@ TEST(step_LSR_abs_zero)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an LSR instruction. */
-    mem[0x1000] = 0x4E;
-    mem[0x1001] = 0x00;
-    mem[0x1002] = 0x20;
+    mem[0x1000] = 0x46;
+    mem[0x1001] = 0x05;
 
-    /* at 0x2000, add the LSR input. */
-    mem[0x2000] = EXPECTED_LSR_INPUT;
+    /* at 0x0005, add the LSR input. */
+    mem[0x0005] = EXPECTED_LSR_INPUT;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -393,11 +388,11 @@ TEST(step_LSR_abs_zero)
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: PC is set to 0x1003. */
-    TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
+    /* POSTCONDITION: PC is set to 0x1002. */
+    TEST_EXPECT(0x1002 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: mem[0x2000] is set to the expected output. */
-    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x2000]);
+    /* POSTCONDITION: mem[0x0005] is set to the expected output. */
+    TEST_EXPECT(EXPECTED_LSR_OUTPUT == mem[0x0005]);
 
     /* POSTCONDITION: the zero flag is set. */
     TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO);
