@@ -198,8 +198,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x55 - EOR ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_x), .max_cycles = 4 },
-    /* Opcode 0x56 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x56 - LSR ZER X instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_LSR_zer_x), .max_cycles = 6 },
     /* Opcode 0x57 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x58 - CLI instruction. */
