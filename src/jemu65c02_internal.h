@@ -1757,10 +1757,10 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDY_zer_x)(
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
- * \param val               The value to exclusive-OR with the accumulator.
+ * \param val               Pointer to the value to shift.
  */
 void JEMU_SYM(j65c02_op_LSR)(
-    JEMU_SYM(j65c02)* inst, uint8_t val);
+    JEMU_SYM(j65c02)* inst, uint8_t* val);
 
 /******************************************************************************/
 /* Start of public exports.                                                   */
