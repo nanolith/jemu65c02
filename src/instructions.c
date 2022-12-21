@@ -52,8 +52,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     /* opcodes 0x10 - 0x1F. */
     /* Opcode 0x10 - BPL instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BPL), .max_cycles = 3 },
-    /* Opcode 0x11 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x11 - ORA ZER Y IDR instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0x12 - ORA ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_idr), .max_cycles = 5 },
     /* Opcode 0x13 - TODO implement. */
