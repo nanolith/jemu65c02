@@ -1752,6 +1752,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDY_abs_x)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_LDY_zer_x)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the LSR operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to exclusive-OR with the accumulator.
+ */
+void JEMU_SYM(j65c02_op_LSR)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
