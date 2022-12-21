@@ -172,8 +172,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x49 - EOR IMM instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_imm), .max_cycles = 2 },
-    /* Opcode 0x4A - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x4A - LSR A instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_LSR_a), .max_cycles = 2 },
     /* Opcode 0x4B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x4C - JMP abs instruction. */
