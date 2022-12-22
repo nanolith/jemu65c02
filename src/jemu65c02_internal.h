@@ -2212,6 +2212,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_PHY)(
     static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
     sym ## j65c02_push(JEMU_SYM(j65c02)* inst, uint8_t val) { \
         return JEMU_SYM(j65c02_push)(inst, val); } \
+    static inline JEMU_SYM(status) FN_DECL_MUST_CHECK \
+    sym ## j65c02_pull(JEMU_SYM(j65c02)* inst, uint8_t* val) { \
+        return JEMU_SYM(j65c02_pull)(inst, val); } \
     static inline void sym ## j65c02_compare( \
         JEMU_SYM(j65c02)* inst, uint8_t lhs, uint8_t rhs) { \
         JEMU_SYM(j65c02_compare)(inst, lhs, rhs); } \

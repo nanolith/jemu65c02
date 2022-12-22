@@ -7,7 +7,7 @@
 JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
-TEST_SUITE(j65c02_push);
+TEST_SUITE(j65c02_pull);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -28,13 +28,14 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * Verify that the push instruction works for an arbitrary stack location.
+ * Verify that the pull instruction works for an arbitrary stack location.
  */
-TEST(push_basics)
+TEST(pull_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
     const uint8_t EXPECTED_VAL = 0x12;
+    uint8_t val = 0;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -42,6 +43,9 @@ TEST(push_basics)
     /* set the reset vector. */
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
+
+    /* save a value to the stack. */
+    mem[0x0150] = EXPECTED_VAL;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -57,30 +61,31 @@ TEST(push_basics)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: sp is set to 0x50. */
-    j65c02_reg_sp_set(inst, 0x50);
+    /* PRECONDITION: sp is set to 0x4F. */
+    j65c02_reg_sp_set(inst, 0x4F);
 
-    /* push a value onto the stack. */
-    TEST_ASSERT(STATUS_SUCCESS == j65c02_push(inst, EXPECTED_VAL));
+    /* pull a value off of the stack. */
+    TEST_ASSERT(STATUS_SUCCESS == j65c02_pull(inst, &val));
 
-    /* POSTCONDITION: sp is decremented. */
-    TEST_EXPECT(0x4F == j65c02_reg_sp_get(inst));
+    /* POSTCONDITION: sp is incremented. */
+    TEST_EXPECT(0x50 == j65c02_reg_sp_get(inst));
 
-    /* POSTCONDITION: location 0x0150 is set to our expected value. */
-    TEST_EXPECT(EXPECTED_VAL == mem[0x0150]);
+    /* POSTCONDITION: val is set to the expected value. */
+    TEST_EXPECT(EXPECTED_VAL == val);
 
     /* clean up. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
 }
 
 /**
- * When SP is 0x00, push causes it to wrap back around to 0xFF.
+ * When SP is 0xFF, pull causes it to wrap back around to 0x00.
  */
 TEST(push_wrap)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
     const uint8_t EXPECTED_VAL = 0x12;
+    uint8_t val = 0;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -88,6 +93,9 @@ TEST(push_wrap)
     /* set the reset vector. */
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
+
+    /* save our value to 0x0100. */
+    mem[0x0100] = EXPECTED_VAL;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -103,17 +111,17 @@ TEST(push_wrap)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: sp is set to 0x00. */
-    j65c02_reg_sp_set(inst, 0x00);
+    /* PRECONDITION: sp is set to 0xFF. */
+    j65c02_reg_sp_set(inst, 0xFF);
 
-    /* push a value onto the stack. */
-    TEST_ASSERT(STATUS_SUCCESS == j65c02_push(inst, EXPECTED_VAL));
+    /* pull a value off of the stack. */
+    TEST_ASSERT(STATUS_SUCCESS == j65c02_pull(inst, &val));
 
-    /* POSTCONDITION: sp is decremented. */
-    TEST_EXPECT(0xFF == j65c02_reg_sp_get(inst));
+    /* POSTCONDITION: sp is incremented. */
+    TEST_EXPECT(0x00 == j65c02_reg_sp_get(inst));
 
-    /* POSTCONDITION: location 0x0150 is set to our expected value. */
-    TEST_EXPECT(EXPECTED_VAL == mem[0x0100]);
+    /* POSTCONDITION: val is set to our expected value. */
+    TEST_EXPECT(EXPECTED_VAL == val);
 
     /* clean up. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
