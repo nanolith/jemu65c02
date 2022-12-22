@@ -32,8 +32,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ASL_zer), .max_cycles = 5 },
     /* Opcode 0x07 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x08 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x08 - PHP instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_PHP), .max_cycles = 3 },
     /* Opcode 0x09 - ORA IMM instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_imm), .max_cycles = 2 },
     /* Opcode 0x0A - ASL A instruction. */
