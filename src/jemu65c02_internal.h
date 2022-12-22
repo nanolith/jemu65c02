@@ -86,6 +86,22 @@ JEMU_SYM(status) FN_DECL_MUST_CHECK
 JEMU_SYM(j65c02_push)(JEMU_SYM(j65c02)* inst, uint8_t val);
 
 /**
+ * \brief Increment the stack pointer then pull the value at the new stack
+ * pointer location off of the stack.
+ *
+ * \param inst              The emulator instance on which this operation is
+ *                          performed.
+ * \param val               The pointer to the variable assigned to the value
+ *                          read from the updated stack location.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) FN_DECL_MUST_CHECK
+JEMU_SYM(j65c02_pull)(JEMU_SYM(j65c02)* inst, uint8_t* val);
+
+/**
  * \brief Compare two values, setting the status flags accordingly.
  *
  * \param inst              The emulator instance on which this operation is
