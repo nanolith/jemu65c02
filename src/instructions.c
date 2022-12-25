@@ -130,8 +130,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_BIT_zer_x), .max_cycles = 4 },
     /* Opcode 0x35 - AND ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer_x), .max_cycles = 4 },
-    /* Opcode 0x36 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x36 - ROL ZER X instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_ROL_zer_x), .max_cycles = 6 },
     /* Opcode 0x37 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x38 - TODO implement. */
