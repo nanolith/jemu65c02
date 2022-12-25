@@ -6,7 +6,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_op_ROL);
+TEST_SUITE(j65c02_op_ROR);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -27,9 +27,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * ROL Normal result (not negative, zero, or carry).
+ * ROR Normal result (not negative, zero, or carry).
  */
-TEST(ROL_basics)
+TEST(ROR_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -68,14 +68,14 @@ TEST(ROL_basics)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: val is rotated left by one. */
-    TEST_EXPECT(0x40 == val);
+    /* POSTCONDITION: val is rotated right by one. */
+    TEST_EXPECT(0x10 == val);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -92,9 +92,9 @@ TEST(ROL_basics)
 }
 
 /**
- * ROL carry-in (not negative, zero, or carry).
+ * ROR carry-in (not zero or carry).
  */
-TEST(ROL_carry_in)
+TEST(ROR_carry_in_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -125,29 +125,28 @@ TEST(ROL_carry_in)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_ZERO);
 
-    /* PRECONDITON: set the negative flag. */
+    /* PRECONDITON: clear the negative flag. */
     j65c02_reg_status_set(
-        inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_NEGATIVE);
+        inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_NEGATIVE);
 
     /* PRECONDITION: set the carry flag. */
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: val is rotated left by one, and the carry is pulled in. */
-    TEST_EXPECT(0x41 == val);
+    /* POSTCONDITION: val is rotated right by one, and carry is pulled in. */
+    TEST_EXPECT(0x90 == val);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
 
-    /* POSTCONDITION: the negative flag is not set. */
-    TEST_EXPECT(
-        0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_NEGATIVE));
+    /* POSTCONDITION: the negative flag is set. */
+    TEST_EXPECT(j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_NEGATIVE);
 
     /* POSTCONDITION: the carry flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_CARRY));
@@ -157,9 +156,9 @@ TEST(ROL_carry_in)
 }
 
 /**
- * ROL Non-zero carry result. (not negative, zero; with carry).
+ * ROR Non-zero carry result. (not negative, zero; with carry).
  */
-TEST(ROL_carry_non_zero)
+TEST(ROR_carry_non_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -198,14 +197,14 @@ TEST(ROL_carry_non_zero)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: val is rotated left by one. */
-    TEST_EXPECT(0x02 == val);
+    /* POSTCONDITION: val is rotated right by one. */
+    TEST_EXPECT(0x40 == val);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -222,13 +221,13 @@ TEST(ROL_carry_non_zero)
 }
 
 /**
- * ROL Zero carry result. (not negative; with zero and carry).
+ * ROR Zero carry result. (not negative; with zero and carry).
  */
-TEST(ROL_carry_zero)
+TEST(ROR_carry_zero)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
-    uint8_t val = 0x80;
+    uint8_t val = 0x01;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -263,13 +262,13 @@ TEST(ROL_carry_zero)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: val is rotated left by one. */
+    /* POSTCONDITION: val is rotated right by one. */
     TEST_EXPECT(0x00 == val);
 
     /* POSTCONDITION: the zero flag is set. */
@@ -287,13 +286,13 @@ TEST(ROL_carry_zero)
 }
 
 /**
- * ROL Negative flag set.
+ * ROR Negative flag set.
  */
-TEST(ROL_negative)
+TEST(ROR_negative)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
-    uint8_t val = 0x41;
+    uint8_t val = 0x02;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -324,18 +323,18 @@ TEST(ROL_negative)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_NEGATIVE);
 
-    /* PRECONDITION: clear the carry flag. */
+    /* PRECONDITION: set the carry flag. */
     j65c02_reg_status_set(
-        inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_CARRY);
+        inst, j65c02_reg_status_get(inst) | JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
 
-    /* POSTCONDITION: val is rotated left by one. */
-    TEST_EXPECT(0x82 == val);
+    /* POSTCONDITION: val is rotated right by one. */
+    TEST_EXPECT(0x81 == val);
 
     /* POSTCONDITION: the zero flag is not set. */
     TEST_EXPECT(0 == (j65c02_reg_status_get(inst) & JEMU_65c02_STATUS_ZERO));
@@ -351,7 +350,7 @@ TEST(ROL_negative)
 }
 
 /**
- * ROL Zero result.
+ * ROR Zero result.
  */
 TEST(ROL_zero)
 {
@@ -392,8 +391,8 @@ TEST(ROL_zero)
     j65c02_reg_status_set(
         inst, j65c02_reg_status_get(inst) & ~JEMU_65c02_STATUS_CARRY);
 
-    /* run the ROL operation. */
-    JEMU_SYM(j65c02_op_ROL)(inst, &val);
+    /* run the ROR operation. */
+    JEMU_SYM(j65c02_op_ROR)(inst, &val);
 
     /* POSTCONDITION: crash flag is not set. */
     TEST_EXPECT(!j65c02_crash_flag_get(inst));
