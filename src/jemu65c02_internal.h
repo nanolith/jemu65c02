@@ -2203,6 +2203,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_ROL_abs_x)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_ROL_zer_x)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the ROR operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               Pointer to the value to shift.
+ */
+void JEMU_SYM(j65c02_op_ROR)(
+    JEMU_SYM(j65c02)* inst, uint8_t* val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
