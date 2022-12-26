@@ -152,8 +152,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x40 - 0x4F. */
-    /* Opcode 0x40 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x40 - RTI instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_RTI), .max_cycles = 6 },
     /* Opcode 0x41 - EOR ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_x_idr), .max_cycles = 6 },
     /* Opcode 0x42 - TODO implement. */
