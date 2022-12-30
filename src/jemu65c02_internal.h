@@ -2318,6 +2318,16 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_RTI)(
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_RTS)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
+/**
+ * \brief Perform the SBC operation.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param val               The value to subtract from the accumulator.
+ */
+void JEMU_SYM(j65c02_op_SBC)(
+    JEMU_SYM(j65c02)* inst, uint8_t val);
+
 /******************************************************************************/
 /* Start of public exports.                                                   */
 /******************************************************************************/
