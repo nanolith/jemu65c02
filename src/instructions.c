@@ -544,8 +544,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xF8 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xF9 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xF9 - SBC ABS Y instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_SBC_abs_y), .max_cycles = 5 },
     /* Opcode 0xFA - PLX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PLX), .max_cycles = 4 },
     /* Opcode 0xFB - TODO implement. */
