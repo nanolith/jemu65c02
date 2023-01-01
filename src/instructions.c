@@ -494,8 +494,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     /* opcodes 0xE0 - 0xEF. */
     /* Opcode 0xE0 - CPX IMM instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CPX_imm), .max_cycles = 2 },
-    /* Opcode 0xE1 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xE1 - SBC ZER X IDR instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_SBC_zer_x_idr), .max_cycles = 7 },
     /* Opcode 0xE2 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xE3 - TODO implement. */
