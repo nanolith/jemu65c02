@@ -510,8 +510,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xE8 - INX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INX), .max_cycles = 2 },
-    /* Opcode 0xE9 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xE9 - SBC IMM instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_SBC_imm), .max_cycles = 2 },
     /* Opcode 0xEA - NOP instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_NOP), .max_cycles = 2 },
     /* Opcode 0xEB - TODO implement. */
