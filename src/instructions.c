@@ -290,8 +290,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     /* opcodes 0x80 - 0x8F. */
     /* Opcode 0x80 - BRA instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BRA), .max_cycles = 3 },
-    /* Opcode 0x81 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x81 - STA ZER X IDR instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_STA_zer_x_idr), .max_cycles = 6 },
     /* Opcode 0x82 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x83 - TODO implement. */
