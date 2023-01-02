@@ -3,7 +3,7 @@
  *
  * \brief Internal header for jemu65c02.
  *
- * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
+ * \copyright 2022-2023 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
  */
 
@@ -2536,6 +2536,21 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_STA_abs)(
  *      - a non-zero error code on failure.
  */
 JEMU_SYM(status) JEMU_SYM(j65c02_inst_STA_zer)(
+    JEMU_SYM(j65c02)* inst, int* cycles);
+
+/**
+ * \brief Handle an STA ZER IDR instruction.
+ *
+ * \param inst              The emulator instance on which this instruction
+ *                          executes.
+ * \param cycles            The number of cycles taken to execute this
+ *                          instruction.
+ *
+ * \returns a status code indicating success or failure.
+ *      - STATUS_SUCCESS on success.
+ *      - a non-zero error code on failure.
+ */
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_STA_zer_idr)(
     JEMU_SYM(j65c02)* inst, int* cycles);
 
 /******************************************************************************/

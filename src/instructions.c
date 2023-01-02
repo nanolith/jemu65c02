@@ -3,7 +3,7 @@
  *
  * \brief List of all supported 65c02 instructions.
  *
- * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
+ * \copyright 2022-2023 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
  */
 
@@ -326,8 +326,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_BCC), .max_cycles = 3 },
     /* Opcode 0x91 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x92 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x92 - STA ZER IDR instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_STA_zer_idr), .max_cycles = 5 },
     /* Opcode 0x93 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x94 - TODO implement. */
