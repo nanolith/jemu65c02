@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_STA_zer_idr);
+TEST_SUITE(j65c02_STA_zer_x_idr);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,9 +25,9 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x92 STA zer idr instruction.
+ * 0x81 STA zer x idr instruction.
  */
-TEST(step_STA_zer_idr_basics)
+TEST(step_STA_zer_x_idr_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
@@ -41,12 +41,12 @@ TEST(step_STA_zer_idr_basics)
     mem[0xFFFD] = 0x10;
 
     /* at 0x1000, add an STA instruction. */
-    mem[0x1000] = 0x92;
+    mem[0x1000] = 0x81;
     mem[0x1001] = 0x05;
 
-    /* at 0x0005, add the address where A is to be stored. */
-    mem[0x0005] = 0x00;
-    mem[0x0006] = 0x20;
+    /* at 0x000A, add the address where A is to be stored. */
+    mem[0x000A] = 0x00;
+    mem[0x000B] = 0x20;
 
     /* create an instance. */
     TEST_ASSERT(
@@ -64,6 +64,9 @@ TEST(step_STA_zer_idr_basics)
 
     /* PRECONDITION: set A to the expected A value. */
     j65c02_reg_a_set(inst, EXPECTED_A_VALUE);
+
+    /* PRECONDITION: set X to 0x05. */
+    j65c02_reg_x_set(inst, 0x05);
 
     /* PRECONDITION: PC is 0x1000. */
     TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
