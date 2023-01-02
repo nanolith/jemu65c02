@@ -1,7 +1,7 @@
 /**
- * \file j65c02_inst_STA_abs_x.c
+ * \file j65c02_inst_STA_abs_y.c
  *
- * \brief Handle an STA abs x instruction.
+ * \brief Handle an STA abs y instruction.
  *
  * \copyright 2023 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
@@ -13,7 +13,7 @@ JEMU_IMPORT_jemu65c02;
 JEMU_IMPORT_jemu65c02_internal;
 
 /**
- * \brief Handle an STA ABS X instruction.
+ * \brief Handle an STA ABS Y instruction.
  *
  * \param inst              The emulator instance on which this instruction
  *                          executes.
@@ -24,14 +24,14 @@ JEMU_IMPORT_jemu65c02_internal;
  *      - STATUS_SUCCESS on success.
  *      - a non-zero error code on failure.
  */
-JEMU_SYM(status) JEMU_SYM(j65c02_inst_STA_abs_x)(
+JEMU_SYM(status) JEMU_SYM(j65c02_inst_STA_abs_y)(
     JEMU_SYM(j65c02)* inst, int* cycles)
 {
     status retval;
     uint16_t addr;
 
     /* fetch the address. */
-    retval = j65c02_addr_abs_x(inst, &addr);
+    retval = j65c02_addr_abs_y(inst, &addr);
     if (STATUS_SUCCESS != retval)
     {
         return retval;
