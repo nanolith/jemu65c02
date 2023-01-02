@@ -52,6 +52,11 @@ typedef uint32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_INVALID_PROCESSOR_STATE                          0x80000004
 
+/**
+ * \brief The processor is stopped and must be reset.
+ */
+#define JEMU_ERROR_PROCESSOR_STOPPED                                0x80000005
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
