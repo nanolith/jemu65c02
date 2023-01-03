@@ -3,7 +3,7 @@
  *
  * \brief The main header for the jemu65c02 emulator.
  *
- * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
+ * \copyright 2022-2023 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
  */
 
