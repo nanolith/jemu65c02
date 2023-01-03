@@ -4,7 +4,7 @@
 
 JEMU_IMPORT_jemu65c02;
 
-TEST_SUITE(j65c02_STX_abs);
+TEST_SUITE(j65c02_STY_abs);
 
 static status mem_read(void* varr, uint16_t addr, uint8_t* val)
 {
@@ -25,13 +25,13 @@ static status mem_write(void* varr, uint16_t addr, uint8_t val)
 }
 
 /**
- * 0x8E STX abs instruction.
+ * 0x8C STY abs instruction.
  */
 TEST(step_STX_abs_basics)
 {
     j65c02* inst = nullptr;
     uint8_t mem[65536];
-    const uint8_t EXPECTED_X_VALUE = 0x12;
+    const uint8_t EXPECTED_Y_VALUE = 0x12;
 
     /* clear memory. */
     memset(mem, 0, sizeof(mem));
@@ -40,8 +40,8 @@ TEST(step_STX_abs_basics)
     mem[0xFFFC] = 0x00;
     mem[0xFFFD] = 0x10;
 
-    /* at 0x1000, add an STX instruction. */
-    mem[0x1000] = 0x8E;
+    /* at 0x1000, add an STY instruction. */
+    mem[0x1000] = 0x8C;
     mem[0x1001] = 0x00;
     mem[0x1002] = 0x20;
 
@@ -59,8 +59,8 @@ TEST(step_STX_abs_basics)
     /* reset the processor. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_reset(inst));
 
-    /* PRECONDITION: set X to the expected X value. */
-    j65c02_reg_x_set(inst, EXPECTED_X_VALUE);
+    /* PRECONDITION: set Y to the expected Y value. */
+    j65c02_reg_y_set(inst, EXPECTED_Y_VALUE);
 
     /* PRECONDITION: PC is 0x1000. */
     TEST_ASSERT(0x1000 == j65c02_reg_pc_get(inst));
@@ -71,8 +71,8 @@ TEST(step_STX_abs_basics)
     /* POSTCONDITION: PC is 0x1003. */
     TEST_EXPECT(0x1003 == j65c02_reg_pc_get(inst));
 
-    /* POSTCONDITION: X is stored in mem[0x2000]. */
-    TEST_EXPECT(EXPECTED_X_VALUE == mem[0x2000]);
+    /* POSTCONDITION: Y is stored in mem[0x2000]. */
+    TEST_EXPECT(EXPECTED_Y_VALUE == mem[0x2000]);
 
     /* clean up. */
     TEST_ASSERT(STATUS_SUCCESS == j65c02_release(inst));
