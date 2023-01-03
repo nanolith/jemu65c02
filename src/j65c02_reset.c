@@ -34,6 +34,7 @@ JEMU_SYM(j65c02_reset)(JEMU_SYM(j65c02)* inst)
     inst->reg_sp = 0xFD;
     inst->reg_status = JEMU_65c02_STATUS_NC | JEMU_65c02_STATUS_BREAK;
     inst->crash = 0;
+    inst->stopped = false;
 
     /* read the low PC counter. */
     uint8_t pc_low;
