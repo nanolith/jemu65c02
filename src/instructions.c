@@ -342,8 +342,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x99 - STA ABS Y instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STA_abs_y), .max_cycles = 5 },
-    /* Opcode 0x9A - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x9A - TXS instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_TXS), .max_cycles = 2 },
     /* Opcode 0x9B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x9C - STZ ABS instruction. */
