@@ -57,6 +57,11 @@ typedef uint32_t JEMU_SYM(status);
  */
 #define JEMU_ERROR_PROCESSOR_STOPPED                                0x80000005
 
+/**
+ * \brief The processor is waiting on an interrupt before continuing.
+ */
+#define JEMU_ERROR_PROCESSOR_WAITING                                0x80000006
+
 /* C++ compatibility. */
 # ifdef   __cplusplus
 }
