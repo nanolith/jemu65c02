@@ -410,8 +410,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CLV), .max_cycles = 2 },
     /* Opcode 0xB9 - LDA ABS Y instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDA_abs_y), .max_cycles = 4 },
-    /* Opcode 0xBA - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0xBA - TSX instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_TSX), .max_cycles = 2 },
     /* Opcode 0xBB - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xBC - LDY ABS X instruction. */
