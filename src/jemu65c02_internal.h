@@ -51,6 +51,7 @@ struct JEMU_SYM(j65c02)
     JEMU_SYM(j65c02_write_fn) write;
     void* user_context;
     bool stopped;
+    bool wait;
     bool crash;
     bool irq;
 };
