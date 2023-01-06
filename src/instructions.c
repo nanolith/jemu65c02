@@ -74,8 +74,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_INC_a), .max_cycles = 2 },
     /* Opcode 0x1B - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x1C - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x1C - TRB ABS instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_TRB_abs), .max_cycles = 6 },
     /* Opcode 0x1D - ORA ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_abs_x), .max_cycles = 4 },
     /* Opcode 0x1E - ASL ABS X instruction. */
