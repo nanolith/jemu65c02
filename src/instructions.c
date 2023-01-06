@@ -58,8 +58,8 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_idr), .max_cycles = 5 },
     /* Opcode 0x13 - TODO implement. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x14 - TODO implement. */
-    { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
+    /* Opcode 0x14 - TRB ZER instruction. */
+    { .exec = &JEMU_SYM(j65c02_inst_TRB_zer), .max_cycles = 5 },
     /* Opcode 0x15 - ORA ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_x), .max_cycles = 4 },
     /* Opcode 0x16 - ASL ZER X instruction. */
