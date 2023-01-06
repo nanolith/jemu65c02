@@ -52,9 +52,6 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_TRB_abs)(
     /* compute the AND product. */
     and_product = inst->reg_a & rhs;
 
-    /* perform the ADC operation. */
-    JEMU_SYM(j65c02_op_ADC)(inst, rhs);
-
     /* write the TRB product to the memory location. */
     retval = inst->write(inst->user_context, addr, trb_product);
     if (STATUS_SUCCESS != retval)
