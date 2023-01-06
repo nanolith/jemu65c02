@@ -14,7 +14,7 @@
  *
  * \param inst              The instance to query.
  *
- * \returns the crash flag.
+ * \returns the stopped flag.
  */
 bool JEMU_SYM(j65c02_stopped_flag_get)(const JEMU_SYM(j65c02)* inst)
 {

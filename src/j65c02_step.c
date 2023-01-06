@@ -44,6 +44,13 @@ JEMU_SYM(j65c02_step)(JEMU_SYM(j65c02)* inst)
         goto done;
     }
 
+    /* if the processor is waiting, return an error. */
+    if (inst->wait)
+    {
+        retval = JEMU_ERROR_PROCESSOR_WAITING;
+        goto done;
+    }
+
     /* fetch an instruction. */
     retval = j65c02_fetch(&ins, inst);
     if (STATUS_SUCCESS != retval)
