@@ -272,7 +272,7 @@ bool JEMU_SYM(j65c02_crash_flag_get)(const JEMU_SYM(j65c02)* inst);
  *
  * \param inst              The instance to query.
  *
- * \returns the crash flag.
+ * \returns the stopped flag.
  */
 bool JEMU_SYM(j65c02_stopped_flag_get)(const JEMU_SYM(j65c02)* inst);
 
@@ -281,7 +281,7 @@ bool JEMU_SYM(j65c02_stopped_flag_get)(const JEMU_SYM(j65c02)* inst);
  *
  * \param inst              The instance to query.
  *
- * \returns the crash flag.
+ * \returns the wait flag.
  */
 bool JEMU_SYM(j65c02_wait_flag_get)(const JEMU_SYM(j65c02)* inst);
 
@@ -394,6 +394,9 @@ int JEMU_SYM(j65c02_emulation_mode_get)(const JEMU_SYM(j65c02)* inst);
     static inline bool \
     sym ## j65c02_stopped_flag_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_stopped_flag_get)(x); } \
+    static inline bool \
+    sym ## j65c02_wait_flag_get(const JEMU_SYM(j65c02)* x) { \
+            return JEMU_SYM(j65c02_wait_flag_get)(x); } \
     static inline int \
     sym ## j65c02_cycle_delta_get(const JEMU_SYM(j65c02)* x) { \
             return JEMU_SYM(j65c02_cycle_delta_get)(x); } \
