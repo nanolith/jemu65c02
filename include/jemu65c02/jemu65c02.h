@@ -277,6 +277,15 @@ bool JEMU_SYM(j65c02_crash_flag_get)(const JEMU_SYM(j65c02)* inst);
 bool JEMU_SYM(j65c02_stopped_flag_get)(const JEMU_SYM(j65c02)* inst);
 
 /**
+ * \brief Get the wait flag.
+ *
+ * \param inst              The instance to query.
+ *
+ * \returns the crash flag.
+ */
+bool JEMU_SYM(j65c02_wait_flag_get)(const JEMU_SYM(j65c02)* inst);
+
+/**
  * \brief Get the cycle delta for this emulator instance.
  *
  * \param inst              The instance to query.
