@@ -55,6 +55,9 @@ JEMU_SYM(status) JEMU_SYM(j65c02_inst_BRK)(
     /* disable interrupts. */
     inst->reg_status |= JEMU_65c02_STATUS_INTERRUPT;
 
+    /* clear decimal mode. */
+    inst->reg_status &= ~JEMU_65c02_STATUS_DECIMAL;
+
     /* fetch the low byte of the new address. */
     retval = inst->read(inst->user_context, 0xFFFE, &addr_low);
     if (STATUS_SUCCESS != retval)
