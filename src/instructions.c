@@ -20,9 +20,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_BRK), .max_cycles = 7 },
     /* Opcode 0x01 - ORA ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0x02 - TODO implement. */
+    /* Opcode 0x02 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x03 - TODO implement. */
+    /* Opcode 0x03 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x04 - TSB ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TSB_zer), .max_cycles = 5 },
@@ -30,7 +30,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer), .max_cycles = 3 },
     /* Opcode 0x06 - ASL ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ASL_zer), .max_cycles = 5 },
-    /* Opcode 0x07 - TODO implement. */
+    /* Opcode 0x07 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x08 - PHP instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PHP), .max_cycles = 3 },
@@ -38,7 +38,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_imm), .max_cycles = 2 },
     /* Opcode 0x0A - ASL A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ASL_a), .max_cycles = 2 },
-    /* Opcode 0x0B - TODO implement. */
+    /* Opcode 0x0B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x0C - TSB abs instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TSB_abs), .max_cycles = 6 },
@@ -46,7 +46,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_abs), .max_cycles = 4 },
     /* Opcode 0x0E - ASL abs instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ASL_abs), .max_cycles = 6 },
-    /* Opcode 0x0F - TODO implement. */
+    /* Opcode 0x0F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x10 - 0x1F. */
@@ -56,7 +56,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0x12 - ORA ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_idr), .max_cycles = 5 },
-    /* Opcode 0x13 - TODO implement. */
+    /* Opcode 0x13 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x14 - TRB ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TRB_zer), .max_cycles = 5 },
@@ -64,7 +64,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_zer_x), .max_cycles = 4 },
     /* Opcode 0x16 - ASL ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ASL_zer_x), .max_cycles = 6 },
-    /* Opcode 0x17 - TODO implement. */
+    /* Opcode 0x17 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x18 - CLC instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CLC), .max_cycles = 2 },
@@ -72,7 +72,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_abs_y), .max_cycles = 4 },
     /* Opcode 0x1A - INC A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INC_a), .max_cycles = 2 },
-    /* Opcode 0x1B - TODO implement. */
+    /* Opcode 0x1B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x1C - TRB ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TRB_abs), .max_cycles = 6 },
@@ -80,7 +80,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ORA_abs_x), .max_cycles = 4 },
     /* Opcode 0x1E - ASL ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ASL_abs_x), .max_cycles = 7 },
-    /* Opcode 0x1F - TODO implement. */
+    /* Opcode 0x1F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x20 - 0x2F. */
@@ -88,9 +88,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_JSR), .max_cycles = 6 },
     /* Opcode 0x21 - AND ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0x22 - TODO implement. */
+    /* Opcode 0x22 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x23 - TODO implement. */
+    /* Opcode 0x23 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x24 - BIT ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BIT_zer), .max_cycles = 3 },
@@ -98,7 +98,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer), .max_cycles = 3 },
     /* Opcode 0x26 - ROL ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROL_zer), .max_cycles = 5 },
-    /* Opcode 0x27 - TODO implement. */
+    /* Opcode 0x27 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x28 - PLP instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PLP), .max_cycles = 4 },
@@ -106,7 +106,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_imm), .max_cycles = 2 },
     /* Opcode 0x2A - ROL A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROL_a), .max_cycles = 2 },
-    /* Opcode 0x2B - TODO implement. */
+    /* Opcode 0x2B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x2C - BIT ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BIT_abs), .max_cycles = 4 },
@@ -114,7 +114,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_abs), .max_cycles = 4 },
     /* Opcode 0x2E - ROL ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROL_abs), .max_cycles = 6 },
-    /* Opcode 0x2F - TODO implement. */
+    /* Opcode 0x2F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x30 - 0x3F. */
@@ -124,7 +124,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0x32 - AND ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer_idr), .max_cycles = 5 },
-    /* Opcode 0x33 - TODO implement. */
+    /* Opcode 0x33 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x34 - BIT ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BIT_zer_x), .max_cycles = 4 },
@@ -132,7 +132,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_zer_x), .max_cycles = 4 },
     /* Opcode 0x36 - ROL ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROL_zer_x), .max_cycles = 6 },
-    /* Opcode 0x37 - TODO implement. */
+    /* Opcode 0x37 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x38 - SEC instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SEC), .max_cycles = 2 },
@@ -140,7 +140,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_abs_y), .max_cycles = 4 },
     /* Opcode 0x3A - DEC A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEC_a), .max_cycles = 2 },
-    /* Opcode 0x3B - TODO implement. */
+    /* Opcode 0x3B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x3C - BIT ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_BIT_abs_x), .max_cycles = 4 },
@@ -148,7 +148,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_AND_abs_x), .max_cycles = 4 },
     /* Opcode 0x3E - ROL ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROL_abs_x), .max_cycles = 7 },
-    /* Opcode 0x3F - TODO implement. */
+    /* Opcode 0x3F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x40 - 0x4F. */
@@ -156,17 +156,17 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_RTI), .max_cycles = 6 },
     /* Opcode 0x41 - EOR ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0x42 - TODO implement. */
+    /* Opcode 0x42 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x43 - TODO implement. */
+    /* Opcode 0x43 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x44 - TODO implement. */
+    /* Opcode 0x44 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x45 - EOR ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer), .max_cycles = 3 },
     /* Opcode 0x46 - LSR ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LSR_zer), .max_cycles = 5 },
-    /* Opcode 0x47 - TODO implement. */
+    /* Opcode 0x47 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x48 - PHA instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PHA), .max_cycles = 3 },
@@ -174,7 +174,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_EOR_imm), .max_cycles = 2 },
     /* Opcode 0x4A - LSR A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LSR_a), .max_cycles = 2 },
-    /* Opcode 0x4B - TODO implement. */
+    /* Opcode 0x4B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x4C - JMP ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_JMP_abs), .max_cycles = 3 },
@@ -182,7 +182,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_EOR_abs), .max_cycles = 4 },
     /* Opcode 0x4E - LSR ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LSR_abs), .max_cycles = 6 },
-    /* Opcode 0x4F - TODO implement. */
+    /* Opcode 0x4F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x50 - 0x5F. */
@@ -192,15 +192,15 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0x52 - EOR ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_idr), .max_cycles = 5 },
-    /* Opcode 0x53 - TODO implement. */
+    /* Opcode 0x53 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x54 - TODO implement. */
+    /* Opcode 0x54 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x55 - EOR ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_zer_x), .max_cycles = 4 },
     /* Opcode 0x56 - LSR ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LSR_zer_x), .max_cycles = 6 },
-    /* Opcode 0x57 - TODO implement. */
+    /* Opcode 0x57 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x58 - CLI instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CLI), .max_cycles = 2 },
@@ -208,15 +208,15 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_EOR_abs_y), .max_cycles = 4 },
     /* Opcode 0x5A - PHY instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PHY), .max_cycles = 3 },
-    /* Opcode 0x5B - TODO implement. */
+    /* Opcode 0x5B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x5C - TODO implement. */
+    /* Opcode 0x5C - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x5D - EOR ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_EOR_abs_x), .max_cycles = 4 },
     /* Opcode 0x5E - LSR ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LSR_abs_x), .max_cycles = 7 },
-    /* Opcode 0x5F - TODO implement. */
+    /* Opcode 0x5F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x60 - 0x6F. */
@@ -224,9 +224,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_RTS), .max_cycles = 6 },
     /* Opcode 0x61 - ADC ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ADC_zer_x_idr), .max_cycles = 7 },
-    /* Opcode 0x62 - TODO implement. */
+    /* Opcode 0x62 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x63 - TODO implement. */
+    /* Opcode 0x63 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x64 - STZ ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STZ_zer), .max_cycles = 3 },
@@ -234,7 +234,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_zer), .max_cycles = 4 },
     /* Opcode 0x66 - ROR ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROR_zer), .max_cycles = 5 },
-    /* Opcode 0x67 - TODO implement. */
+    /* Opcode 0x67 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x68 - PLA instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PLA), .max_cycles = 4 },
@@ -242,7 +242,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_imm), .max_cycles = 3 },
     /* Opcode 0x6A - ROR A instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROR_a), .max_cycles = 2 },
-    /* Opcode 0x6B - TODO implement. */
+    /* Opcode 0x6B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x6C - JMP abs idr instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_JMP_abs_idr), .max_cycles = 6 },
@@ -250,7 +250,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_abs), .max_cycles = 5 },
     /* Opcode 0x6E - ROR ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROR_abs), .max_cycles = 6 },
-    /* Opcode 0x6F - TODO implement. */
+    /* Opcode 0x6F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x70 - 0x7F. */
@@ -260,7 +260,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_zer_y_idr), .max_cycles = 6 },
     /* Opcode 0x72 - ADC ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ADC_zer_idr), .max_cycles = 6 },
-    /* Opcode 0x73 - TODO implement. */
+    /* Opcode 0x73 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x74 - STZ ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STZ_zer_x), .max_cycles = 4 },
@@ -268,7 +268,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_zer_x), .max_cycles = 5 },
     /* Opcode 0x76 - ROR ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROR_zer_x), .max_cycles = 6 },
-    /* Opcode 0x77 - TODO implement. */
+    /* Opcode 0x77 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x78 - SEI instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SEI), .max_cycles = 2 },
@@ -276,7 +276,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_abs_y), .max_cycles = 5 },
     /* Opcode 0x7A - PLY instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PLY), .max_cycles = 4 },
-    /* Opcode 0x7B - TODO implement. */
+    /* Opcode 0x7B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x7C - JMP abs x idr. */
     { .exec = &JEMU_SYM(j65c02_inst_JMP_abs_x_idr), .max_cycles = 6 },
@@ -284,7 +284,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_ADC_abs_x), .max_cycles = 5 },
     /* Opcode 0x7E - ROR ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_ROR_abs_x), .max_cycles = 7 },
-    /* Opcode 0x7F - TODO implement. */
+    /* Opcode 0x7F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x80 - 0x8F. */
@@ -292,9 +292,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_BRA), .max_cycles = 3 },
     /* Opcode 0x81 - STA ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STA_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0x82 - TODO implement. */
+    /* Opcode 0x82 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0x83 - TODO implement. */
+    /* Opcode 0x83 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x84 - STY ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STY_zer), .max_cycles = 3 },
@@ -302,7 +302,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_zer), .max_cycles = 3 },
     /* Opcode 0x86 - STX ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STX_zer), .max_cycles = 3 },
-    /* Opcode 0x87 - TODO implement. */
+    /* Opcode 0x87 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x88 - DEY instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEY), .max_cycles = 2 },
@@ -310,7 +310,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_BIT_imm), .max_cycles = 2 },
     /* Opcode 0x8A - TXA instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TXA), .max_cycles = 2 },
-    /* Opcode 0x8B - TODO implement. */
+    /* Opcode 0x8B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x8C - STY ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STY_abs), .max_cycles = 4 },
@@ -318,7 +318,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_abs), .max_cycles = 4 },
     /* Opcode 0x8E - STX ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STX_abs), .max_cycles = 4 },
-    /* Opcode 0x8F - TODO implement. */
+    /* Opcode 0x8F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0x90 - 0x9F. */
@@ -328,7 +328,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_zer_y_idr), .max_cycles = 6 },
     /* Opcode 0x92 - STA ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STA_zer_idr), .max_cycles = 5 },
-    /* Opcode 0x93 - TODO implement. */
+    /* Opcode 0x93 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x94 - STY ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STY_zer_x), .max_cycles = 4 },
@@ -336,7 +336,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_zer_x), .max_cycles = 4 },
     /* Opcode 0x96 - STX ZER Y instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STX_zer_y), .max_cycles = 4 },
-    /* Opcode 0x97 - TODO implement. */
+    /* Opcode 0x97 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x98 - TYA instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TYA), .max_cycles = 2 },
@@ -344,7 +344,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_abs_y), .max_cycles = 5 },
     /* Opcode 0x9A - TXS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TXS), .max_cycles = 2 },
-    /* Opcode 0x9B - TODO implement. */
+    /* Opcode 0x9B - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0x9C - STZ ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STZ_abs), .max_cycles = 4 },
@@ -352,7 +352,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_STA_abs_x), .max_cycles = 5 },
     /* Opcode 0x9E - STZ ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STZ_abs_x), .max_cycles = 5 },
-    /* Opcode 0x9F - TODO implement. */
+    /* Opcode 0x9F - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xA0 - 0xAF. */
@@ -362,7 +362,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer_x_idr), .max_cycles = 6 },
     /* Opcode 0xA2 - LDX IMM instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDX_imm), .max_cycles = 2 },
-    /* Opcode 0xA3 - TODO implement. */
+    /* Opcode 0xA3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xA4 - LDY ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDY_zer), .max_cycles = 3 },
@@ -370,7 +370,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer), .max_cycles = 3 },
     /* Opcode 0xA6 - LDX ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDX_zer), .max_cycles = 3 },
-    /* Opcode 0xA7 - TODO implement. */
+    /* Opcode 0xA7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xA8 - TAY instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TAY), .max_cycles = 2 },
@@ -378,7 +378,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_imm), .max_cycles = 2 },
     /* Opcode 0xAA - TAX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TAX), .max_cycles = 2 },
-    /* Opcode 0xAB - TODO implement. */
+    /* Opcode 0xAB - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xAC - LDY ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDY_abs), .max_cycles = 4 },
@@ -386,7 +386,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_abs), .max_cycles = 4 },
     /* Opcode 0xAE - LDX ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDX_abs), .max_cycles = 4 },
-    /* Opcode 0xAF - TODO implement. */
+    /* Opcode 0xAF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xB0 - 0xBF. */
@@ -396,7 +396,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0xB2 - LDA ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer_idr), .max_cycles = 5 },
-    /* Opcode 0xB3 - TODO implement. */
+    /* Opcode 0xB3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xB4 - LDY ZER X. */
     { .exec = &JEMU_SYM(j65c02_inst_LDY_zer_x), .max_cycles = 4 },
@@ -404,7 +404,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_zer_x), .max_cycles = 4 },
     /* Opcode 0xB6 - LDX ZER Y. */
     { .exec = &JEMU_SYM(j65c02_inst_LDX_zer_y), .max_cycles = 4 },
-    /* Opcode 0xB7 - TODO implement. */
+    /* Opcode 0xB7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xB8 - CLV instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CLV), .max_cycles = 2 },
@@ -412,7 +412,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_abs_y), .max_cycles = 4 },
     /* Opcode 0xBA - TSX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_TSX), .max_cycles = 2 },
-    /* Opcode 0xBB - TODO implement. */
+    /* Opcode 0xBB - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xBC - LDY ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDY_abs_x), .max_cycles = 4 },
@@ -420,7 +420,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_LDA_abs_x), .max_cycles = 4 },
     /* Opcode 0xBE - LDX ABS Y instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_LDX_abs_y), .max_cycles = 4 },
-    /* Opcode 0xBF - TODO implement. */
+    /* Opcode 0xBF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xC0 - 0xCF. */
@@ -428,9 +428,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CPY_imm), .max_cycles = 2 },
     /* Opcode 0xC1 - CMP ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer_x_idr), .max_cycles = 6 },
-    /* Opcode 0xC2 - TODO implement. */
+    /* Opcode 0xC2 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xC3 - TODO implement. */
+    /* Opcode 0xC3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xC4 - CPY ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CPY_zer), .max_cycles = 3 },
@@ -438,7 +438,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer), .max_cycles = 3 },
     /* Opcode 0xC6 - DEC ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEC_zer), .max_cycles = 5 },
-    /* Opcode 0xC7 - TODO implement. */
+    /* Opcode 0xC7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xC8 - INY instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INY), .max_cycles = 2 },
@@ -454,7 +454,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CMP_abs), .max_cycles = 4 },
     /* Opcode 0xCE - DEC abs instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEC_abs), .max_cycles = 6 },
-    /* Opcode 0xCF - TODO implement. */
+    /* Opcode 0xCF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xD0 - 0xDF. */
@@ -464,15 +464,15 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer_y_idr), .max_cycles = 5 },
     /* Opcode 0xD2 - CMP ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer_idr), .max_cycles = 5 },
-    /* Opcode 0xD3 - TODO implement. */
+    /* Opcode 0xD3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xD4 - TODO implement. */
+    /* Opcode 0xD4 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xD5 - CMP ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_zer_x), .max_cycles = 4 },
     /* Opcode 0xD6 - DEC ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEC_zer_x), .max_cycles = 6 },
-    /* Opcode 0xD7 - TODO implement. */
+    /* Opcode 0xD7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xD8 - CLD instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CLD), .max_cycles = 2 },
@@ -482,13 +482,13 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_PHX), .max_cycles = 3 },
     /* Opcode 0xDB - STP instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_STP), .max_cycles = 3 },
-    /* Opcode 0xDC - TODO implement. */
+    /* Opcode 0xDC - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xDD - CMP ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CMP_abs_x), .max_cycles = 4 },
     /* Opcode 0xDE - DEC ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_DEC_abs_x), .max_cycles = 7 },
-    /* Opcode 0xDF - TODO implement. */
+    /* Opcode 0xDF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xE0 - 0xEF. */
@@ -496,9 +496,9 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_CPX_imm), .max_cycles = 2 },
     /* Opcode 0xE1 - SBC ZER X IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SBC_zer_x_idr), .max_cycles = 7 },
-    /* Opcode 0xE2 - TODO implement. */
+    /* Opcode 0xE2 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xE3 - TODO implement. */
+    /* Opcode 0xE3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xE4 - CPX ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CPX_zer), .max_cycles = 3 },
@@ -506,7 +506,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_SBC_zer), .max_cycles = 4 },
     /* Opcode 0xE6 - INC ZER instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INC_zer), .max_cycles = 5 },
-    /* Opcode 0xE7 - TODO implement. */
+    /* Opcode 0xE7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xE8 - INX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INX), .max_cycles = 2 },
@@ -514,7 +514,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_SBC_imm), .max_cycles = 3 },
     /* Opcode 0xEA - NOP instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_NOP), .max_cycles = 2 },
-    /* Opcode 0xEB - TODO implement. */
+    /* Opcode 0xEB - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xEC - CPX ABS instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_CPX_abs), .max_cycles = 4 },
@@ -522,7 +522,7 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_SBC_abs), .max_cycles = 5 },
     /* Opcode 0xEE - INC abs. */
     { .exec = &JEMU_SYM(j65c02_inst_INC_abs), .max_cycles = 6 },
-    /* Opcode 0xEF - TODO implement. */
+    /* Opcode 0xEF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 
     /* opcodes 0xF0 - 0xFF. */
@@ -532,15 +532,15 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_SBC_zer_y_idr), .max_cycles = 6 },
     /* Opcode 0xF2 - SBC ZER IDR instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SBC_zer_idr), .max_cycles = 6 },
-    /* Opcode 0xF3 - TODO implement. */
+    /* Opcode 0xF3 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xF4 - TODO implement. */
+    /* Opcode 0xF4 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xF5 - SBC ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SBC_zer_x), .max_cycles = 5 },
     /* Opcode 0xF6 - INC ZER X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INC_zer_x), .max_cycles = 6 },
-    /* Opcode 0xF7 - TODO implement. */
+    /* Opcode 0xF7 - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xF8 - SED instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SED), .max_cycles = 2 },
@@ -548,14 +548,14 @@ JEMU_SYM(j65c02_instruction) JEMU_SYM(global_j65c02_instructions)[256] = {
     { .exec = &JEMU_SYM(j65c02_inst_SBC_abs_y), .max_cycles = 5 },
     /* Opcode 0xFA - PLX instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_PLX), .max_cycles = 4 },
-    /* Opcode 0xFB - TODO implement. */
+    /* Opcode 0xFB - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
-    /* Opcode 0xFC - TODO implement. */
+    /* Opcode 0xFC - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
     /* Opcode 0xFD - SBC ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_SBC_abs_x), .max_cycles = 5 },
     /* Opcode 0xFE - INC ABS X instruction. */
     { .exec = &JEMU_SYM(j65c02_inst_INC_abs_x), .max_cycles = 7 },
-    /* Opcode 0xFF - TODO implement. */
+    /* Opcode 0xFF - Not implemented on the 65C02. */
     { .exec = &JEMU_SYM(j65c02_inst_invalid_opcode), .max_cycles = 2 },
 };
