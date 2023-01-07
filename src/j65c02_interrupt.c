@@ -30,7 +30,7 @@ JEMU_SYM(j65c02_interrupt)(JEMU_SYM(j65c02)* inst)
     /* disable the wait flag on interrupt. */
     inst->wait = false;
 
-    /* checkt to see if interrupts are enabled. */
+    /* check to see if interrupts are enabled. */
     if (! (inst->reg_status & JEMU_65c02_STATUS_INTERRUPT))
     {
         /* push the PC onto the stack. */
