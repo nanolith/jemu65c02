@@ -89,7 +89,7 @@ this instance is no longer needed, it can be released by calling
 j65c02 Interface
 ----------------
 
-The `j65c02` interface consists of the following functions: create, run,
+The `j65c02` interface consists of the following functions: create, step, run,
 interrupt, nmi, and release. These functions allow for the complete exercise of
 all 65c02 related functionality. However, these functions rely on two
 user-provided callbacks, which are defined using the `j65c02_read_fn` and
@@ -137,6 +137,15 @@ code.
         j65c02** inst, j65c02_read_fn, j65c02_write_fn, void*);
 ```
 
+The `j65c02_step` function runs a single instruction on the given emulator
+instance. If the CPU is stopped or waiting for an interrupt, an appropriate
+error message is returned.
+
+```C
+    j65c02_status j65c02_step(j65c02*, int);
+```
+
+
 The `j65c02_run` function runs the provided instance for up to the number of
 cycles provided in the second argument. Because each instruction supported by
 the 65(c)02 can take a different number of cycles to run, it's possible that
@@ -144,7 +153,9 @@ passing a number like 1000 cycles may end in the middle of an instruction. In
 this case, to keep the emulation simple, this time is "added" to the instance
 and the partial instruction is executed in full during the next time that the
 run method is called. The run method only returns between instructions, which
-simplifies interrupt and nmi logic.
+simplifies interrupt and nmi logic. If the CPU is stopped or is waiting for an
+interrupt, the run function will return successfully immediately, which makes
+low-power emulation easier, as the emulator's CPU can get back to sleep faster.
 
 ```C
     j65c02_status j65c02_run(j65c02*, int);
@@ -152,9 +163,9 @@ simplifies interrupt and nmi logic.
 
 The `j65c02_interrupt` function triggers the interrupt pin of the emulated
 processor. During the next run, the interrupt functionality will be executed as
-per the 65(c)02 manual, assuming that the interrupt flag is enabled. If the
-interrupt flag is not enabled, then this functionality will be executed the next
-time the interrupt flag is enabled.
+per the 65(c)02 manual, assuming that interrupts are enabled. If the
+interrupt disable flag is set, then this function will end a CPU wait, but won't
+trigger an interrupt.
 
 ```C
     j65c02_status j65c02_interrupt(j65c02*);
