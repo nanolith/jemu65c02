@@ -53,7 +53,6 @@ struct JEMU_SYM(j65c02)
     bool stopped;
     bool wait;
     bool crash;
-    bool irq;
 };
 
 /**
