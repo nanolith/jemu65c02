@@ -68,7 +68,7 @@ endif()
 #Build a pkg-config file
 SET(JEMU_PC "${CMAKE_BINARY_DIR}/jemu65c02.pc")
 FILE(WRITE  ${JEMU_PC} "Name: jemu65c02")
-FILE(APPEND ${JEMU_PC} "\nDescription: Reliable C Portable Runtime")
+FILE(APPEND ${JEMU_PC} "\nDescription: JEMU 65C02 Emulator")
 FILE(APPEND ${JEMU_PC} "\nVersion: ${CMAKE_PROJECT_VERSION}")
 FILE(APPEND ${JEMU_PC} "\nURL: https://github.com/nanolith/jemu65c02")
 FILE(APPEND ${JEMU_PC} "\nprefix=${CMAKE_INSTALL_PREFIX}")
