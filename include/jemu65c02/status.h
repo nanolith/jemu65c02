@@ -3,7 +3,7 @@
  *
  * \brief Status codes for jemu65c02.
  *
- * \copyright 2022 Justin Handville.  Please see LICENSE.txt in this
+ * \copyright 2022-2023 Justin Handville.  Please see LICENSE.txt in this
  * distribution for the license terms under which this software is distributed.
  */
 
@@ -61,6 +61,11 @@ typedef uint32_t JEMU_SYM(status);
  * \brief The processor is waiting on an interrupt before continuing.
  */
 #define JEMU_ERROR_PROCESSOR_WAITING                                0x80000006
+
+/**
+ * \brief There was some kind of peripheral related error.
+ */
+#define JEMU_ERROR_PERIPHERAL                                       0x80000007
 
 /* C++ compatibility. */
 # ifdef   __cplusplus
